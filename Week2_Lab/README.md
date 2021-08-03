@@ -34,7 +34,7 @@ To run the app locally, please follow the steps below:
 
 1. Clone the repository
 ```
-pass
+https://github.com/KarlokZhang/FIT2095-LabTasks.git
 ```
 2. Install dependencies
 ```
