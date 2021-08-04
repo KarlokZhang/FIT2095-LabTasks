@@ -27,12 +27,15 @@ http
         let msg = getMessage(week);
         res.end("<h1>" + msg + "</h1>");
         break;
+      case '/help':
+        sendFile('help.html', 200, res);
+        break;
       default:
         sendFile('error.html', 404, res);
         break;
     }
   })
-  .listen(8080);
+  .listen(5050);
 console.log('Server running at http://127.0.0.1:8080/');
 
 const sendFile = (fileName, responseCode, res) => {
