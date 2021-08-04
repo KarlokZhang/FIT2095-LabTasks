@@ -2,6 +2,7 @@ let http = require('http');
 let fs = require('fs');
 const util = require('./util');
 
+// Http server
 http
   .createServer(function (req, res) {
     let baseURL = 'http://' + req.headers.host + '/';
@@ -38,6 +39,7 @@ http
   .listen(5050);
 console.log('Server running at http://127.0.0.1:8080/');
 
+// Method to send file as response
 const sendFile = (fileName, responseCode, res) => {
   fs.readFile(fileName, (error, content) => {
     if (!error) {
@@ -52,6 +54,7 @@ const sendFile = (fileName, responseCode, res) => {
 };
 
 const getMessage = (weeks) => {
+  //lookup table for message
   const lookupTable = [
     {
       min: Number.NEGATIVE_INFINITY,
