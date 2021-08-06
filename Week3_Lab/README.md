@@ -3,7 +3,7 @@
 > ## You are required to build a web application that represents a bookstore management system.
 <br><br/>
 
-## Specification are:
+## Specification:
 
 *  The database is implemented as an array of items (books)
 *  It uses Express.js as a middleware
@@ -29,9 +29,10 @@
 **Bonus:  use express.Router() to separate the routes in a different file.**
 <br></br>
 
-## Demo
-![demo](./images/demo.gif)
+## Demo:
 
+![demo](./images/demo.gif)
+<br></br>
 ## Access Locally
 
 ### Prerequisites:
