@@ -11,6 +11,7 @@ http
 
     switch (pathName) {
       case '/':
+      case 'index':
         sendFile('index.html', 200, res);
         break;
       case '/assessments':

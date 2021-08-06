@@ -22,9 +22,14 @@ All four pages must have a link to the home page (index.html)
 
 ![demo2](./images/demo2.gif)
 
+## Extra tasks:
+1. Add a new end point "localhost:8080/help" that will send back help.html file.
+2. Change the port number from 8080 to 5050.
+
+
 ## Access Locally
 
-Prerequisities:
+Prerequisites:
 
 - Node: https://nodejs.org/en/download/
 
