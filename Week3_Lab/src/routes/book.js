@@ -8,10 +8,12 @@ const {
   addBook,
   deleteBookById,
   getBookStoreValue,
+  getHomePage,
 } = require('../controllers/book');
 
 const router = express.Router();
 
+router.get('/', getHomePage);
 router.get('/getallitems', getAllBook);
 router.get('/book/:id', parseId, checkBookExist, getBookById);
 router.get('/addbook', addBook);

@@ -29,6 +29,9 @@
 **Bonus:  use express.Router() to separate the routes in a different file.**
 <br></br>
 
+## Demo
+![demo](./images/demo.gif)
+
 ## Access Locally
 
 ### Prerequisites:
