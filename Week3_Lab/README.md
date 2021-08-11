@@ -27,6 +27,10 @@
 <br></br>
 
 **Bonus:  use express.Router() to separate the routes in a different file.**
+
+### Extra Tasks:
+* Add a route '/deleteallfreebooks' to delete all free books from your store
+
 <br></br>
 
 ## Demo:

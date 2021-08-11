@@ -46,6 +46,11 @@ function getHomePage(req, res) {
   return res.send('<h1>Welcome to FIT2085 Book Store.</h1>');
 }
 
+function deleteAllFreeBooks(req, res) {
+  Book.deleteAllFreeBooks();
+  return res.send('<h2>All Free Books Deleted</h2>');
+}
+
 function generateList(books) {
   let st = 'Id    Title   Author    Topic   Price   </br>';
   for (let i = 0; i < books.length; i++) {
@@ -71,4 +76,5 @@ module.exports = {
   deleteBookById,
   getBookStoreValue,
   getHomePage,
+  deleteAllFreeBooks,
 };

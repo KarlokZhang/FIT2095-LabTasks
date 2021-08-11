@@ -13,6 +13,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use('/', router);
 
-app.listen(8080, () => {
-  console.log('App listening at port 8080.')
+app.listen(3000, () => {
+  console.log('App listening at port 3000.')
 });

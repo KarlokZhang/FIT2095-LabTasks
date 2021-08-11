@@ -6,7 +6,7 @@
   price: Number;
 } */
 
-const books = [];
+let books = [];
 
 // Create
 function addBook(title, author, topic, price) {
@@ -16,7 +16,7 @@ function addBook(title, author, topic, price) {
     title: title,
     author: author,
     topic: topic,
-    price: Number(price),
+    price: parseFloat(price),
   };
 
   books.push(book);
@@ -52,6 +52,14 @@ function getBookStoreValue() {
   return priceList.reduce((a, b) => a + b, 0);
 }
 
+//get all free books
+function deleteAllFreeBooks() { 
+  books = books.filter(function (e){
+    return e.price > 0;
+  });
+  return books;
+}
+
 
 module.exports = {
   getAllBook,
@@ -59,6 +67,7 @@ module.exports = {
   getBookById,
   deleteBookById,
   getBookStoreValue,
+  deleteAllFreeBooks,
 };
 
 
