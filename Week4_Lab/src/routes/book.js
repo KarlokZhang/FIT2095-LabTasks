@@ -1,26 +1,20 @@
 const express = require('express');
-const parseId = require('../middleware/parseId');
-const checkBookExist = require('../middleware/checkBookExist');
+
+const checkInvalidData = require('../middleware/checkInvalidData');
 
 const {
   getAllBook,
-  getBookById,
   addBook,
-  deleteBookById,
-  getBookStoreValue,
   getHomePage,
-  deleteAllFreeBooks,
+  postNewBook,
 } = require('../controllers/book');
 
 const router = express.Router();
 
 router.get('/', getHomePage);
-router.get('/getallitems', getAllBook);
-router.get('/book/:id', parseId, checkBookExist, getBookById);
+router.get('/listbooks', getAllBook);
 router.get('/addbook', addBook);
-router.get('/deleteid/:id', parseId, checkBookExist, deleteBookById);
-router.get('/getbookstorevalue', getBookStoreValue);
 
-router.get('/deleteallfreebooks', deleteAllFreeBooks);
+router.post('/newbookdata', checkInvalidData, postNewBook);
 
 module.exports = router;

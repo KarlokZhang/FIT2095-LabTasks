@@ -1,0 +1,50 @@
+<%- include('header.html') -%>
+<!-- When Books db is Empty -->
+<% if(books.length === 0) { %>
+  <div class="row pt-5">
+    <div class="col-4">
+      <img class="error--img" src="emptyError.jpg" alt="error-img">
+    </div>
+    <div class="col-8 error-msg text-center d-flex flex-column justify-content-center">
+      <h2 class="display-3 fw-bold py-5">OOPS!</h2>
+      <p class="fs-4 fw-light text-secondary">Your book store is Empty!</p>
+      <p class="fs-4 fw-light text-secondary">Please go to add some book first.</p>
+      <div class="pt-5">
+        <a class="btn btn-secondary" href="/addbook" role="button">Add Book</a>
+      </div>
+    </div>
+  </div>
+<% } %>
+<!-- When Books db have books -->
+<% if(books.length > 0) { %>
+  <h2 class="py-4">All Books:</h2>
+  <table class="w-75 table table-bordered">
+    <tr class="table-primary">
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Topic</th>
+      <th>Price</th>
+    </tr>
+    <% for (let i = 0; i < books.length; i++){ %>
+      <tr>
+        <td>
+          <%= books[i].id %>
+        </td>
+        <td>
+          <%= books[i].title %>
+        </td>
+        <td>
+          <%= books[i].author %>
+        </td>
+        <td>
+          <%= books[i].topic %>
+        </td>
+        <td>
+          <%= books[i].price %>
+        </td>
+      </tr>
+    <% }%>
+  </table>
+<% } %>
+<%- include('footer.html') -%>

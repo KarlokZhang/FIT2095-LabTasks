@@ -5,8 +5,11 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const path = require('path');
 
 const router = require('./routes');
+
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -17,8 +20,21 @@ const morganLog =
 app.use(morganLog);
 app.use(cors());
 app.use(helmet());
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 app.use(express.json());
 app.use('/', router);
+  
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'images')));
+app.use(express.static(path.join(__dirname, 'styles')));
+
+app.get('*', errorHandler);
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
