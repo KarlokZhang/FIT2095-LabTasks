@@ -71,6 +71,3 @@ npm run dev
 ```
 4. Now access the page at http://localhost:8080
 
-
-
-

@@ -6,7 +6,7 @@
   price: Number;
 } */
 
-const Book = require('../models/Book');
+const Book = require("../models/Book");
 
 function getAllBook(req, res) {
   const books = Book.getAllBook();
@@ -16,21 +16,21 @@ function getAllBook(req, res) {
   //     '<h2>Book store is empty, please add some book first.</h2>'
   //   );
   // }
-  res.render('listbook', { books: books });
+  res.render("listbook", { books: books });
 }
 
 function addBook(req, res) {
-  res.render('addbook', {newBook: null});
+  res.render("addbook", { newBook: null });
 }
 
 function getHomePage(req, res) {
-  res.render('home');
+  res.render("home");
 }
 
 function postNewBook(req, res) {
   const { title, author, topic, price } = req.body;
   const newBook = Book.addBook(title, author, topic, price);
-  res.render('addbook', {newBook: newBook});
+  res.render("addbook", { newBook: newBook });
 }
 
 module.exports = {
