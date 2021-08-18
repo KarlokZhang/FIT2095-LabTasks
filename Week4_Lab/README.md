@@ -1,4 +1,4 @@
-## Week 4 Lab Tasks
+b## Week 4 Lab Tasks
 
 > ### Develop a simple bookstore management system, such that:
 <br></br>
@@ -24,6 +24,12 @@
 8.  The server should respond with 404 page for any wrong/invalid pathname (i.e. URL). The error message on the 404 page should be an image.
 9.  Users must be able to navigate through the app pages using hyperlinks placed in the header of each page.
 <br></br>
+
+## Extra Tasks:
+> ### Create a new endpoint to list all title of the books
+>
+<br></br>
+
 ## Demo
 ![demo](./src/public/images/demo.gif)
 
