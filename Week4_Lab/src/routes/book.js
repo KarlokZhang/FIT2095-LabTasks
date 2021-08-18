@@ -1,20 +1,22 @@
-const express = require('express');
+const express = require("express");
 
-const checkInvalidData = require('../middleware/checkInvalidData');
+const checkInvalidData = require("../middleware/checkInvalidData");
 
 const {
   getAllBook,
   addBook,
   getHomePage,
   postNewBook,
-} = require('../controllers/book');
+  getAllBookTitles,
+} = require("../controllers/book");
 
 const router = express.Router();
 
-router.get('/', getHomePage);
-router.get('/listbooks', getAllBook);
-router.get('/addbook', addBook);
+router.get("/", getHomePage);
+router.get("/listbooks", getAllBook);
+router.get("/listtitles", getAllBookTitles);
+router.get("/addbook", addBook);
 
-router.post('/newbookdata', checkInvalidData, postNewBook);
+router.post("/newbookdata", checkInvalidData, postNewBook);
 
 module.exports = router;

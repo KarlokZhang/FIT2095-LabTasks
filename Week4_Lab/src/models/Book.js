@@ -48,18 +48,23 @@ function getBookIndexById(id) {
 
 // get total value of the book store
 function getBookStoreValue() {
-  let priceList = books.map(book => book.price);
+  let priceList = books.map((book) => book.price);
   return priceList.reduce((a, b) => a + b, 0);
 }
 
 //get all free books
-function deleteAllFreeBooks() { 
-  books = books.filter(function (e){
+function deleteAllFreeBooks() {
+  books = books.filter(function (e) {
     return e.price > 0;
   });
   return books;
 }
 
+// getAllBookTitle
+function getAllBookTitles() {
+  const titles = books.map((book) => book.title);
+  return titles;
+}
 
 module.exports = {
   getAllBook,
@@ -68,6 +73,5 @@ module.exports = {
   deleteBookById,
   getBookStoreValue,
   deleteAllFreeBooks,
+  getAllBookTitles,
 };
-
-

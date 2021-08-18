@@ -10,13 +10,13 @@ const Book = require("../models/Book");
 
 function getAllBook(req, res) {
   const books = Book.getAllBook();
-
-  // if (books.length === 0) {
-  //   return res.send(
-  //     '<h2>Book store is empty, please add some book first.</h2>'
-  //   );
-  // }
   res.render("listbook", { books: books });
+}
+
+function getAllBookTitles(req, res) {
+  const titles = Book.getAllBookTitles();
+  console.log(titles);
+  res.render("listtitles", { titles: titles });
 }
 
 function addBook(req, res) {
@@ -38,4 +38,5 @@ module.exports = {
   addBook,
   getHomePage,
   postNewBook,
+  getAllBookTitles,
 };
