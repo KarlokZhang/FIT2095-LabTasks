@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const router = require('./router');
+const mongoUtil = require('./utils/mongoUtil');
+
 const logger = console;
 
 const app = express();
@@ -19,6 +21,7 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
+mongoUtil.connectToDb();
 app.use('/', router);
 
 app.listen(PORT, () => {
