@@ -1,22 +1,47 @@
 <%- include('header.html') -%>
-<h2 class="py-4">Add Book Page</h2>
+<h2 class="py-4">Edit Book Page</h2>
 
 <form class="w-50" action="/createBook" method="POST">
   <div class="mb-3">
     <label for="book-title" class="form-label">Title:</label>
-    <input type="text" class="form-control" id="book-title" name="title" />
+    <input
+      type="text"
+      class="form-control"
+      id="book-title"
+      name="title"
+      placeholder="<%= book.title %>"
+    />
   </div>
   <div class="mb-3">
     <label for="book-author" class="form-label">Author:</label>
-    <input type="text" class="form-control" id="book-author" name="author" />
+    <input
+      type="text"
+      class="form-control"
+      id="book-author"
+      name="author"
+      placeholder="<%= book.author %>"
+    />
   </div>
   <div class="mb-3">
     <label for="book--topic" class="form-label">Topic:</label>
-    <input type="text" class="form-control" id="book--topic" name="topic" />
+    <input
+      type="text"
+      class="form-control"
+      id="book--topic"
+      name="topic"
+      placeholder="<%= book.topic %>"
+    />
   </div>
   <div class="mb-3">
     <label for="book--dop" class="form-label">Publish date:</label>
-    <input type="date" class="form-control" id="book--dop" name="dop" />
+    <input
+      type="date"
+      class="form-control"
+      id="book--dop"
+      name="dop"
+      value="<%= book.dop %>"
+      placeholder="<%= book.dop %>"
+    />
   </div>
   <div class="mb-3">
     <label for="book--summary" class="form-label">Summary</label>
@@ -26,6 +51,7 @@
       rows="10"
       id="book--summary"
       name="summary"
+      placeholder="<%= book.summary %>"
     ></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>

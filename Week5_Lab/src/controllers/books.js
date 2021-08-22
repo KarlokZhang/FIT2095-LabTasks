@@ -1,29 +1,56 @@
 /* eslint-disable comma-dangle */
+const dayjs = require('dayjs');
 const Book = require('../models/books');
+const { getBookById } = require('../models/books');
+
+// Date formatter helper function
+function dateFormatterHelper(date) {
+  return dayjs(date).format('DD/MM/YYYY');
+}
 
 function getHomePage(req, res) {
   res.render('home');
 }
 
+function getAddBookPage(req, res) {
+  res.render('addBook');
+}
+
+async function getEditBookPage(req, res) {
+  const { id } = req.params;
+  const book = await getBookById(id);
+  res.render('editBook', {
+    book,
+  });
+}
+
 async function getAllBooks(req, res) {
-  const books = await Book.getAllBooks();
-  return res.json(books);
+  const allBooks = await Book.getAllBooks();
+  res.render('listbook', {
+    books: allBooks,
+  });
 }
 
 async function createBook(req, res) {
   const { title, author, topic, dop, summary } = req.body;
-  const newBookId = await Book.createBook(title, author, topic, dop, summary);
-  return res.json(newBookId);
+  await Book.createBook(
+    title,
+    author,
+    topic,
+    dateFormatterHelper(dop),
+    summary,
+  );
+  res.redirect('/listbooks');
 }
 
-async function getBookById(req, res) {
-  const { id } = req.params;
-  const book = await Book.getBookById(id);
-  if (!book) {
-    return res.sendStatus(404);
-  }
-  return res.json(book);
-}
+// async function getBookById(req, res) {
+//   const { id } = req.params;
+//   const book = await Book.getBookById(id);
+//   if (!book) {
+//     return res.sendStatus(404);
+//   }
+//   return res.json(book);
+// }
 
 async function updateBookById(req, res) {
   const { id } = req.params;
@@ -34,7 +61,7 @@ async function updateBookById(req, res) {
     author,
     topic,
     dop,
-    summary
+    summary,
   );
   return res.json(result);
 }
@@ -47,18 +74,15 @@ async function updateBookByTitle(req, res) {
     author,
     topic,
     dop,
-    summary
+    summary,
   );
   return res.json(result);
 }
 
 async function deleteBookById(req, res) {
   const { id } = req.params;
-  const result = await Book.deleteBookById(id);
-  if (!result) {
-    return res.sendStatus(404);
-  }
-  return res.json(result);
+  await Book.deleteBookById(id);
+  res.redirect('/listbooks');
 }
 
 async function deleteAllBooksByTopic(req, res) {
@@ -72,8 +96,10 @@ async function deleteAllBooksByTopic(req, res) {
 
 module.exports = {
   getHomePage,
+  getAddBookPage,
+  getEditBookPage,
   getAllBooks,
-  getBookById,
+  // getBookById,
   updateBookByTitle,
   updateBookById,
   deleteBookById,

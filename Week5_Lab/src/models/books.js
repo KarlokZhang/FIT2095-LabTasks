@@ -66,7 +66,7 @@ async function updateBookById(id, title, author, topic, dop, summary) {
       .collection('books')
       .updateOne({ _id: ObjectId(id) }, updateData, { upsert: true });
     console.log(
-      `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`
+      `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
     );
     return result;
   } catch (error) {
@@ -91,7 +91,7 @@ async function updateBookByTitle(title, author, topic, dop, summary) {
       .collection('books')
       .updateOne({ title }, updateData, { upsert: true });
     console.log(
-      `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`
+      `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
     );
     return result;
   } catch (error) {

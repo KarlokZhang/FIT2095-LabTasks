@@ -2,8 +2,10 @@ const express = require('express');
 
 const {
   getHomePage,
+  getAddBookPage,
+  getEditBookPage,
   getAllBooks,
-  getBookById,
+  // getBookById,
   updateBookById,
   updateBookByTitle,
   deleteBookById,
@@ -14,12 +16,14 @@ const {
 const router = express.Router();
 
 router.get('/', getHomePage);
+router.get('/addbook', getAddBookPage);
+router.get('/editBook/:id', getEditBookPage);
 router.get('/listbooks', getAllBooks);
-router.get('/:id', getBookById);
-router.put('/title/:title', updateBookByTitle);
-router.put('/id/:id', updateBookById);
-router.delete('/id/:id', deleteBookById);
-router.delete('/topic/:topic', deleteAllBooksByTopic);
-router.post('/addbook', createBook);
+// router.get('/:id', getBookById);
+router.post('/title/:title', updateBookByTitle);
+router.post('/id/:id', updateBookById);
+router.get('/deleteId/:id', deleteBookById);
+router.delete('/deleteTopic/:topic', deleteAllBooksByTopic);
+router.post('/createBook', createBook);
 
 module.exports = router;
