@@ -16,10 +16,10 @@ const router = express.Router();
 router.get('/', getHomePage);
 router.get('/listbooks', getAllBooks);
 router.get('/:id', getBookById);
-router.put('/:id', updateBookById);
-router.put('/:title', updateBookByTitle);
-router.delete('/id', deleteBookById);
-router.delete('/:topic', deleteAllBooksByTopic);
+router.put('/title/:title', updateBookByTitle);
+router.put('/id/:id', updateBookById);
+router.delete('/id/:id', deleteBookById);
+router.delete('/topic/:topic', deleteAllBooksByTopic);
 router.post('/addbook', createBook);
 
 module.exports = router;

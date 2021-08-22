@@ -2,110 +2,129 @@
 /* eslint-disable object-curly-spacing */
 /* eslint-disable object-curly-newline */
 /* eslint-disable comma-dangle */
+const { ObjectId } = require('mongodb');
 const mongoUtil = require('../utils/mongoUtil');
 
-const db = mongoUtil.getDb();
+const { getDb } = mongoUtil;
 
 // create
-function createBook({ title, author, topic, dop, summary }) {
-  const newBook = db.collection('books').insertOne({
-    title,
-    author,
-    topic,
-    dop,
-    summary,
-  });
-
-  return newBook;
-}
-
-// get all books
-function getAllBooks() {
-  db.collection('books')
-    .find()
-    .toArray((err, data) => {
-      if (err) {
-        console.log(err);
-      }
-      return data;
-    });
-}
-
-// get book by id
-function getBookById(id) {
-  db.collection('week5table').findOne({ id }, (err, result) => {
-    if (err) {
-      console.log(err);
-    }
-    return result;
-  });
-}
-
-// update book by id
-function updateBookById({ id, title, author, topic, dop, summary }) {
-  const updateData = {
-    $set: {
+async function createBook(title, author, topic, dop, summary) {
+  const db = getDb();
+  try {
+    const result = await db.collection('books').insertOne({
       title,
       author,
       topic,
       dop,
       summary,
-    },
-  };
-  db.collection('week5table').updateOne(
-    { id },
-    updateData,
-    { upsert: false },
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      return result;
-    }
-  );
+    });
+    return result.insertedId;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+}
+
+// get all books
+async function getAllBooks() {
+  const db = getDb();
+  try {
+    const books = await db.collection('books').find().toArray();
+    return books;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+}
+
+// get book by id
+async function getBookById(id) {
+  const db = getDb();
+  try {
+    const book = await db.collection('books').findOne({ _id: ObjectId(id) });
+    return book;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+}
+
+// update book by id
+async function updateBookById(id, title, author, topic, dop, summary) {
+  const db = getDb();
+  try {
+    const updateData = {
+      $set: {
+        title,
+        author,
+        topic,
+        dop,
+        summary,
+      },
+    };
+    const result = await db
+      .collection('books')
+      .updateOne({ _id: ObjectId(id) }, updateData, { upsert: true });
+    console.log(
+      `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
 }
 
 // update book by title
-function updateBookByTitle({ title, author, topic, dop, summary }) {
-  const updateData = {
-    $set: {
-      author,
-      topic,
-      dop,
-      summary,
-    },
-  };
-  db.collection('week5table').updateOne(
-    { title },
-    updateData,
-    { upsert: false },
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      return result;
-    }
-  );
+async function updateBookByTitle(title, author, topic, dop, summary) {
+  const db = getDb();
+  try {
+    const updateData = {
+      $set: {
+        author,
+        topic,
+        dop,
+        summary,
+      },
+    };
+    const result = await db
+      .collection('books')
+      .updateOne({ title }, updateData, { upsert: true });
+    console.log(
+      `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
 }
 
 // delete book by id
-function deleteBookById(id) {
-  db.collection('books').deleteOne({ id }, (err, obj) => {
-    if (err) {
-      console.log(err);
-    }
-    return obj.result;
-  });
+async function deleteBookById(id) {
+  const db = getDb();
+  try {
+    const result = await db
+      .collection('books')
+      .deleteOne({ _id: ObjectId(id) });
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
 }
 
 // delete all books by topic
-function deleteAllBooksByTopic({ topic }) {
-  db.collection('books').deleteMany({ topic }, (err, obj) => {
-    if (err) {
-      console.log(err);
-    }
-    return obj.result;
-  });
+async function deleteAllBooksByTopic(topic) {
+  const db = getDb();
+  try {
+    const result = await db.collection('books').deleteMany({ topic });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
 }
 
 module.exports = {

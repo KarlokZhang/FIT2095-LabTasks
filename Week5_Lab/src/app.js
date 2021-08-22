@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const router = require('./routes');
+const routes = require('./routes');
 const mongoUtil = require('./utils/mongoUtil');
 
 const app = express();
@@ -21,7 +21,7 @@ app.use(helmet());
 app.use(express.json());
 
 mongoUtil.connectToDb();
-app.use('/', router);
+app.use('/', routes);
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);

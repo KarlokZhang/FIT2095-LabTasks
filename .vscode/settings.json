@@ -3,9 +3,5 @@
   "workbench.preferredDarkColorTheme": "Moonlight II",
   "workbench.preferredHighContrastColorTheme": "Moonlight II",
   "workbench.preferredLightColorTheme": "Moonlight II",
-  "workbench.iconTheme": "vscode-icons",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "eslint.validate": ["javascript"]
+  "workbench.iconTheme": "vscode-icons"
 }

@@ -16,7 +16,7 @@ module.exports = {
       if (err) {
         logger.log('Err  ', err);
       } else {
-        logger.log('Connected successfully to server');
+        logger.log('Connected successfully to MongoDb server');
         db = client.db(dbName);
       }
     });
