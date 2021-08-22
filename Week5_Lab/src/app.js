@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 require('dotenv').config();
 
 const express = require('express');
@@ -5,10 +6,8 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const router = require('./router');
+const router = require('./routes');
 const mongoUtil = require('./utils/mongoUtil');
-
-const logger = console;
 
 const app = express();
 
@@ -25,5 +24,5 @@ mongoUtil.connectToDb();
 app.use('/', router);
 
 app.listen(PORT, () => {
-  logger.log(`server listening on port ${PORT}`);
+  console.log(`server listening on port ${PORT}`);
 });

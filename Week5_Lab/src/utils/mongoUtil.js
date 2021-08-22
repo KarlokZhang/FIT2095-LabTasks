@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 const mongodb = require('mongodb');
 
 const { MongoClient } = mongodb;
