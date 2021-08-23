@@ -13,6 +13,8 @@ const {
   addSampleBooks,
 } = require('../controllers/books');
 
+const checkInvalidData = require('../middlewares/checkInvalidData');
+
 const router = express.Router();
 
 // Home Page
@@ -25,15 +27,15 @@ router.get('/editBook/:id', getEditBookPage);
 router.get('/listbooks', getAllBooks);
 
 // Update Book By Title
-router.post('/title/:title', updateBookByTitle);
+router.post('/title/:title', checkInvalidData, updateBookByTitle);
 // Update Book By ID
-router.post('/id/:id', updateBookById);
+router.post('/id/:id', checkInvalidData, updateBookById);
 // Delete Book By ID
 router.get('/deleteId/:id', deleteBookById);
 // Delete Book By Topics
 router.delete('/deleteTopic/:topic', deleteAllBooksByTopic);
 // Add new Book
-router.post('/createBook', createBook);
+router.post('/createBook', checkInvalidData, createBook);
 
 // Add Sample Books
 router.post('/addsamplebooks', addSampleBooks);
