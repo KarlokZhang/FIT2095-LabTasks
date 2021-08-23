@@ -6,6 +6,7 @@ const { ObjectId } = require('mongodb');
 const mongoUtil = require('../utils/mongoUtil');
 
 const { getDb } = mongoUtil;
+const sampleBooks = require('../../sampleBooks');
 
 // create
 async function createBook(title, author, topic, dop, summary) {
@@ -19,6 +20,18 @@ async function createBook(title, author, topic, dop, summary) {
       summary,
     });
     return result.insertedId;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+}
+
+// add Sample Books
+async function addSampleBooks() {
+  const db = getDb();
+  try {
+    const result = await db.collection('books').insertMany(sampleBooks);
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -129,6 +142,7 @@ async function deleteAllBooksByTopic(topic) {
 
 module.exports = {
   createBook,
+  addSampleBooks,
   getAllBooks,
   getBookById,
   updateBookById,

@@ -10,6 +10,7 @@ const {
   deleteBookById,
   deleteAllBooksByTopic,
   createBook,
+  addSampleBooks,
 } = require('../controllers/books');
 
 const router = express.Router();
@@ -33,5 +34,8 @@ router.get('/deleteId/:id', deleteBookById);
 router.delete('/deleteTopic/:topic', deleteAllBooksByTopic);
 // Add new Book
 router.post('/createBook', createBook);
+
+// Add Sample Books
+router.post('/addsamplebooks', addSampleBooks);
 
 module.exports = router;

@@ -47,6 +47,12 @@ async function createBook(req, res) {
   res.redirect('/listbooks');
 }
 
+// Add Sample Books
+async function addSampleBooks(req, res) {
+  const books = await Book.addSampleBooks();
+  return res.json(books);
+}
+
 // async function getBookById(req, res) {
 //   const { id } = req.params;
 //   const book = await Book.getBookById(id);
@@ -111,4 +117,5 @@ module.exports = {
   deleteBookById,
   deleteAllBooksByTopic,
   createBook,
+  addSampleBooks,
 };
