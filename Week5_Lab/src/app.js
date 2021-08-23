@@ -10,6 +10,7 @@ const dayjs = require('dayjs');
 
 const router = require('./routes');
 const mongoUtil = require('./utils/mongoUtil');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 dayjs().format();
@@ -36,6 +37,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/public')));
+
+app.get('*', errorHandler);
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);

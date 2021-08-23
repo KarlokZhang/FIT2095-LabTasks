@@ -1,7 +1,7 @@
 <%- include('header.html') -%>
 <h2 class="py-4">Edit Book Page</h2>
 
-<form class="w-50" action="/createBook" method="POST">
+<form class="w-50" action="<%= `/id/${book._id}` %>" method="POST">
   <div class="mb-3">
     <label for="book-title" class="form-label">Title:</label>
     <input
@@ -9,7 +9,7 @@
       class="form-control"
       id="book-title"
       name="title"
-      placeholder="<%= book.title %>"
+      value="<%= book.title %>"
     />
   </div>
   <div class="mb-3">
@@ -19,7 +19,7 @@
       class="form-control"
       id="book-author"
       name="author"
-      placeholder="<%= book.author %>"
+      value="<%= book.author %>"
     />
   </div>
   <div class="mb-3">
@@ -29,7 +29,7 @@
       class="form-control"
       id="book--topic"
       name="topic"
-      placeholder="<%= book.topic %>"
+      value="<%= book.topic %>"
     />
   </div>
   <div class="mb-3">
@@ -40,7 +40,7 @@
       id="book--dop"
       name="dop"
       value="<%= book.dop %>"
-      placeholder="<%= book.dop %>"
+      value="<%= book.dop %>"
     />
   </div>
   <div class="mb-3">
@@ -51,8 +51,9 @@
       rows="10"
       id="book--summary"
       name="summary"
-      placeholder="<%= book.summary %>"
-    ></textarea>
+    >
+<%= book.summary %></textarea
+    >
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

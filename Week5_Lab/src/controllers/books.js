@@ -26,8 +26,12 @@ async function getEditBookPage(req, res) {
 
 async function getAllBooks(req, res) {
   const allBooks = await Book.getAllBooks();
+  const booksForDisplay = allBooks.map((book) => ({
+    ...book,
+    dop: dayjs(book.dop).format('DD/MM/YYYY'),
+  }));
   res.render('listbook', {
-    books: allBooks,
+    books: booksForDisplay,
   });
 }
 
@@ -63,7 +67,9 @@ async function updateBookById(req, res) {
     dop,
     summary,
   );
-  return res.json(result);
+  // eslint-disable-next-line no-console
+  console.log('update result: ', result);
+  res.redirect('/listbooks');
 }
 
 async function updateBookByTitle(req, res) {
