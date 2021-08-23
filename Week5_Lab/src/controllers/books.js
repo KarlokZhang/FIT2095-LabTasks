@@ -16,6 +16,10 @@ function getAddBookPage(req, res) {
   res.render('addBook');
 }
 
+function getDeleteTopicPage(req, res) {
+  res.render('deleteTopic');
+}
+
 async function getEditBookPage(req, res) {
   const { id } = req.params;
   const book = await getBookById(id);
@@ -97,19 +101,21 @@ async function deleteBookById(req, res) {
   res.redirect('/listbooks');
 }
 
+// eslint-disable-next-line consistent-return
 async function deleteAllBooksByTopic(req, res) {
-  const { topic } = req.params;
+  const { topic } = req.body;
   const result = await Book.deleteAllBooksByTopic(topic);
   if (result.deletedCount === 0) {
-    return res.sendStatus(404);
+    res.render('404');
   }
-  return res.json(result);
+  res.redirect('/listbooks');
 }
 
 module.exports = {
   getHomePage,
   getAddBookPage,
   getEditBookPage,
+  getDeleteTopicPage,
   getAllBooks,
   // getBookById,
   updateBookByTitle,

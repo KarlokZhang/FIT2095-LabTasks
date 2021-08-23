@@ -1,6 +1,10 @@
 // eslint-disable-next-line consistent-return
-module.exports = function checkInvalidData(req, res, next) {
+function checkInvalidData(req, res, next) {
   const { title, author, topic, dop, summary } = req.body;
+  if (topic === '') {
+    return res.render('invalid');
+  }
+
   if (
     title.length < 3 ||
     author.length < 3 ||
@@ -11,4 +15,18 @@ module.exports = function checkInvalidData(req, res, next) {
     return res.render('invalid');
   }
   next();
+}
+
+// eslint-disable-next-line consistent-return
+function checkEmptyTopic(req, res, next) {
+  const { topic } = req.body;
+  if (topic === '') {
+    return res.render('invalid');
+  }
+  next();
+}
+
+module.exports = {
+  checkEmptyTopic,
+  checkInvalidData,
 };

@@ -1,9 +1,11 @@
+/* eslint-disable import/no-unresolved */
 const express = require('express');
 
 const {
   getHomePage,
   getAddBookPage,
   getEditBookPage,
+  getDeleteTopicPage,
   getAllBooks,
   updateBookById,
   updateBookByTitle,
@@ -13,7 +15,10 @@ const {
   addSampleBooks,
 } = require('../controllers/books');
 
-const checkInvalidData = require('../middlewares/checkInvalidData');
+const {
+  checkInvalidData,
+  checkEmptyTopic,
+} = require('../middlewares/checkInvalidData');
 
 const router = express.Router();
 
@@ -25,6 +30,8 @@ router.get('/addbook', getAddBookPage);
 router.get('/editBook/:id', getEditBookPage);
 // All Books Page
 router.get('/listbooks', getAllBooks);
+// Delete Book By Topic Page
+router.get('/delete/topic', getDeleteTopicPage);
 
 // Update Book By Title
 router.post('/title/:title', checkInvalidData, updateBookByTitle);
@@ -33,7 +40,7 @@ router.post('/id/:id', checkInvalidData, updateBookById);
 // Delete Book By ID
 router.get('/deleteId/:id', deleteBookById);
 // Delete Book By Topics
-router.delete('/deleteTopic/:topic', deleteAllBooksByTopic);
+router.post('/deleteTopic', checkEmptyTopic, deleteAllBooksByTopic);
 // Add new Book
 router.post('/createBook', checkInvalidData, createBook);
 

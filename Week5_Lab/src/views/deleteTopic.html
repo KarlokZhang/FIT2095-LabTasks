@@ -1,0 +1,12 @@
+<%- include('header.html') -%>
+<h2 class="py-4">Delete Book By Topic</h2>
+
+<form class="w-50" action="/deleteTopic" method="POST">
+  <div class="mb-3">
+    <label for="book--topic" class="form-label">Topic:</label>
+    <input type="text" class="form-control" id="book--topic" name="topic" />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%- include('footer.html') -%>
