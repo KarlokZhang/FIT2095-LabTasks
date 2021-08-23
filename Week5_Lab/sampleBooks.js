@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 const sampleBooks = [
   {
     title: 'Why We Sleep',

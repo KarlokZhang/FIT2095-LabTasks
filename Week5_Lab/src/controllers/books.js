@@ -3,11 +3,6 @@ const dayjs = require('dayjs');
 const Book = require('../models/books');
 const { getBookById } = require('../models/books');
 
-// Date formatter helper function
-function dateFormatterHelper(date) {
-  return dayjs(date).format('DD/MM/YYYY');
-}
-
 function getHomePage(req, res) {
   res.render('home');
 }
@@ -41,13 +36,7 @@ async function getAllBooks(req, res) {
 
 async function createBook(req, res) {
   const { title, author, topic, dop, summary } = req.body;
-  await Book.createBook(
-    title,
-    author,
-    topic,
-    dateFormatterHelper(dop),
-    summary,
-  );
+  await Book.createBook(title, author, topic, dop, summary);
   res.redirect('/listbooks');
 }
 
