@@ -26,7 +26,18 @@ function checkEmptyTopic(req, res, next) {
   next();
 }
 
+// eslint-disable-next-line consistent-return
+function checkEmptyInputDate(req, res, next) {
+  const { fromDate, toDate } = req.body;
+  console.log(req.body);
+  if (!fromDate || !toDate) {
+    return res.render('invalid');
+  }
+  next();
+}
+
 module.exports = {
   checkEmptyTopic,
   checkInvalidData,
+  checkEmptyInputDate,
 };

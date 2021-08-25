@@ -15,6 +15,10 @@ function getDeleteTopicPage(req, res) {
   res.render('deleteTopic');
 }
 
+function getDeleteByDatePage(req, res) {
+  res.render('deleteByDate');
+}
+
 async function getEditBookPage(req, res) {
   const { id } = req.params;
   const book = await getBookById(id);
@@ -94,10 +98,14 @@ async function deleteBookById(req, res) {
 async function deleteAllBooksByTopic(req, res) {
   const { topic } = req.body;
   const result = await Book.deleteAllBooksByTopic(topic);
-  if (result.deletedCount === 0) {
-    res.render('404');
-  }
+  console.log(result);
   res.redirect('/listbooks');
+}
+async function deleteAllBooksByDateRange(req, res) {
+  const { fromDate, toDate } = req.body;
+  const result = await Book.deleteAllBooksByDateRange(fromDate, toDate);
+  console.log(result);
+  res.redirect('listbooks');
 }
 
 module.exports = {
@@ -105,12 +113,14 @@ module.exports = {
   getAddBookPage,
   getEditBookPage,
   getDeleteTopicPage,
+  getDeleteByDatePage,
   getAllBooks,
   // getBookById,
   updateBookByTitle,
   updateBookById,
   deleteBookById,
   deleteAllBooksByTopic,
+  deleteAllBooksByDateRange,
   createBook,
   addSampleBooks,
 };

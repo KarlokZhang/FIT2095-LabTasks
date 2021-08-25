@@ -140,6 +140,20 @@ async function deleteAllBooksByTopic(topic) {
   return null;
 }
 
+// EXTRA TASKS: delete all books by given date range
+async function deleteAllBooksByDateRange(fromDate, toDate) {
+  const db = getDb();
+  try {
+    const result = await db.collection('books').deleteMany({
+      dop: { $gte: fromDate, $lte: toDate },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+}
+
 module.exports = {
   createBook,
   addSampleBooks,
@@ -149,4 +163,5 @@ module.exports = {
   updateBookByTitle,
   deleteBookById,
   deleteAllBooksByTopic,
+  deleteAllBooksByDateRange,
 };

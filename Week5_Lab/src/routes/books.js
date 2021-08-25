@@ -6,11 +6,13 @@ const {
   getAddBookPage,
   getEditBookPage,
   getDeleteTopicPage,
+  getDeleteByDatePage,
   getAllBooks,
   updateBookById,
   updateBookByTitle,
   deleteBookById,
   deleteAllBooksByTopic,
+  deleteAllBooksByDateRange,
   createBook,
   addSampleBooks,
 } = require('../controllers/books');
@@ -18,6 +20,7 @@ const {
 const {
   checkInvalidData,
   checkEmptyTopic,
+  checkEmptyInputDate,
 } = require('../middlewares/checkInvalidData');
 
 const router = express.Router();
@@ -32,6 +35,8 @@ router.get('/editBook/:id', getEditBookPage);
 router.get('/listbooks', getAllBooks);
 // Delete Book By Topic Page
 router.get('/delete/topic', getDeleteTopicPage);
+// Delete Book By Date Range Page
+router.get('/deleteByDate', getDeleteByDatePage);
 
 // Update Book By Title
 router.post('/title/:title', checkInvalidData, updateBookByTitle);
@@ -41,6 +46,12 @@ router.post('/id/:id', checkInvalidData, updateBookById);
 router.get('/deleteId/:id', deleteBookById);
 // Delete Book By Topics
 router.post('/deleteTopic', checkEmptyTopic, deleteAllBooksByTopic);
+// Delete Book By Given Date Range
+router.post(
+  '/deleteByDateRange',
+  checkEmptyInputDate,
+  deleteAllBooksByDateRange,
+);
 // Add new Book
 router.post('/createBook', checkInvalidData, createBook);
 

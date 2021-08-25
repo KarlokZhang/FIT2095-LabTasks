@@ -1,0 +1,21 @@
+<%- include('header.html') -%>
+<h2 class="py-4">Delete Book By Date</h2>
+
+<form class="w-50" action="/deleteByDateRange" method="POST">
+  <div class="mb-3">
+    <label for="book--fromDate" class="form-label">From date:</label>
+    <input
+      type="date"
+      class="form-control"
+      id="book--fromDate"
+      name="fromDate"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="book--toDate" class="form-label">To date:</label>
+    <input type="date" class="form-control" id="book--toDate" name="toDate" />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%- include('footer.html') -%>
