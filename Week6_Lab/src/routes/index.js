@@ -1,6 +1,7 @@
 const express = require('express');
 const doctorRoute = require('./doctors');
 const patientRoute = require('./patients');
+const rootRoute = require('../controllers/root');
 
 const router = express.Router();
 
