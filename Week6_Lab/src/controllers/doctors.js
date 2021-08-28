@@ -23,7 +23,7 @@ async function getDoctorById(req, res) {
 }
 
 async function createDoctor(req, res) {
-  const { firstName, lastName, dob, state, suburb, street, unit } = req.body;
+  const { firstName, lastName, dob, unit, street, suburb, state } = req.body;
   const doctor = new Doctor({
     fullName: {
       firstName,
@@ -40,7 +40,8 @@ async function createDoctor(req, res) {
 
   try {
     const result = await doctor.save();
-    return result;
+    console.log(result);
+    res.redirect('/');
   } catch (error) {
     console.log(error);
   }
