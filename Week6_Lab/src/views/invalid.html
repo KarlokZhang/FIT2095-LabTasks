@@ -1,0 +1,16 @@
+<%- include('header.html') -%>
+  <div class="row pt-5">
+    <div class="col-4">
+      <img class="error--img" src="/images/invalidImg.jpeg" alt="error-img">
+    </div>
+    <div class="col-8 error-msg text-center d-flex flex-column justify-content-center">
+      <h2 class="display-3 fw-bold py-5">UUPS!</h2>
+      <p class="fs-4 fw-light text-secondary">Your input is invalid!</p>
+      <p class="fs-4 fw-light text-secondary">Book's title, author and topic needs to have at least 3 characters.</p>
+      <p class="fs-4 fw-light text-secondary">And book's price can not be negative.</p>
+      <div class="pt-5">
+        <a class="btn btn-secondary" href="/addbook" role="button">Try Again</a>
+      </div>
+    </div>
+  </div>
+<%- include('footer.html') -%>

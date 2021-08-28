@@ -1,0 +1,34 @@
+<%- include('header.html') -%>
+<h2 class="py-4">Add Book Page</h2>
+
+<form class="w-50" action="/createBook" method="POST">
+  <div class="mb-3">
+    <label for="book-title" class="form-label">Title:</label>
+    <input type="text" class="form-control" id="book-title" name="title" />
+  </div>
+  <div class="mb-3">
+    <label for="book-author" class="form-label">Author:</label>
+    <input type="text" class="form-control" id="book-author" name="author" />
+  </div>
+  <div class="mb-3">
+    <label for="book--topic" class="form-label">Topic:</label>
+    <input type="text" class="form-control" id="book--topic" name="topic" />
+  </div>
+  <div class="mb-3">
+    <label for="book--dop" class="form-label">Publish date:</label>
+    <input type="date" class="form-control" id="book--dop" name="dop" />
+  </div>
+  <div class="mb-3">
+    <label for="book--summary" class="form-label">Summary</label>
+    <textarea
+      type="text"
+      class="form-control"
+      rows="10"
+      id="book--summary"
+      name="summary"
+    ></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%- include('footer.html') -%>
