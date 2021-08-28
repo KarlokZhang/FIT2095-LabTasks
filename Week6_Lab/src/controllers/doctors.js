@@ -1,6 +1,10 @@
 const Doctor = require('../models/doctors');
 const Patient = require('../models/patients');
 
+function getAddDoctorPage(req, res) {
+  res.render('addDoctor');
+}
+
 async function getAllDoctors(req, res) {
   const doctors = await Doctor.find().exec();
   if (!doctors) {
@@ -81,6 +85,7 @@ async function deleteDoctorById(req, res) {
 }
 
 module.exports = {
+  getAddDoctorPage,
   getAllDoctors,
   getDoctorById,
   createDoctor,

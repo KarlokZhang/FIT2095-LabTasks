@@ -1,6 +1,7 @@
 const express = require('express');
 
 const {
+  getAddDoctorPage,
   getAllDoctors,
   getDoctorById,
   createDoctor,
@@ -10,6 +11,7 @@ const {
 
 const router = express.Router();
 
+router.get('/addDoctor', getAddDoctorPage);
 router.get('/', getAllDoctors);
 router.get('/:id', getDoctorById);
 router.post('/', createDoctor);
