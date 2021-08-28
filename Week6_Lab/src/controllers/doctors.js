@@ -79,3 +79,11 @@ async function deleteDoctorById(req, res) {
     return res.sendStatus(404);
   }
 }
+
+module.exports = {
+  getAllDoctors,
+  getDoctorById,
+  createDoctor,
+  updateDoctorById,
+  deleteDoctorById,
+};
