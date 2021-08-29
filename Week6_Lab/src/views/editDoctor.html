@@ -1,0 +1,87 @@
+<%- include('header.html') -%>
+<h2 class="py-4">Edit Doctor</h2>
+
+<form action="<%= `/doctors/edit/${doctor._id}` %>" method="POST">
+  <div class="row mb-3">
+    <div class="form-group col-6">
+      <label class="form-label" for="fName">First Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="fName"
+        value="<%= doctor.firstName %>"
+        name="firstName"
+      />
+    </div>
+    <div class="form-group col-6">
+      <label class="form-label" for="lName">Last Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lName"
+        value="<%= doctor.lastName %>"
+        name="lastName"
+      />
+    </div>
+  </div>
+  <div class="mb-4 form-group col-6">
+    <label for="dateOfBirth" class="form-label">Date Of Birth:</label>
+    <input
+      type="date"
+      class="form-control"
+      id="dateOfBirth"
+      value="<%= doctor.dateOfBirth %>"
+      name="dob"
+    />
+  </div>
+  <div class="form-row mb-4">
+    <h5 class="form-label">Address:</h5>
+    <div class="row">
+      <div class="form-group col-2">
+        <label for="unitInput" class="form-label">Unit:</label>
+        <input
+          id="unitInput"
+          class="form-control"
+          type="text"
+          value="<%= doctor.unit %>"
+          name="unit"
+        />
+      </div>
+      <div class="form-group col-5">
+        <label for="streetInput" class="form-label">Street:</label>
+        <input
+          id="streetInput"
+          class="form-control"
+          type="text"
+          value="<%= doctor.street %>"
+          name="street"
+        />
+      </div>
+      <div class="form-group col-3">
+        <label for="suburbInput" class="form-label">Suburb:</label>
+        <input
+          id="suburbInput"
+          class="form-control"
+          type="text"
+          value="<%= doctor.suburb %>"
+          name="suburb"
+        />
+      </div>
+      <div class="form-group col-2">
+        <label for="stateInput" class="form-label">State:</label>
+        <input
+          id="stateInput"
+          class="form-control"
+          type="text"
+          value="<%= doctor.state %>"
+          name="state"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+<%- include('footer.html') -%>

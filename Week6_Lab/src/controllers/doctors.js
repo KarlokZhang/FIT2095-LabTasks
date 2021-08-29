@@ -6,6 +6,27 @@ function getAddDoctorPage(req, res) {
   res.render('addDoctor');
 }
 
+async function getEditDoctorPage(req, res) {
+  const { id } = req.params;
+  const doctor = await Doctor.findById(id);
+  console.log(doctor.dateOfBirth);
+  console.log(dayjs(doctor.dateOfBirth).format('YYYY-MM-DD'));
+  doctor.dateOfBirth = dayjs(doctor.dateOfBirth).format('YYYY-MM-DD');
+
+  const formattedDoctor = {
+    _id: doctor._id,
+    firstName: doctor.fullName.firstName,
+    lastName: doctor.fullName.lastName,
+    dateOfBirth: dayjs(doctor.dateOfBirth).format('YYYY-MM-DD'),
+    unit: doctor.address.unit,
+    street: doctor.address.street,
+    suburb: doctor.address.suburb,
+    state: doctor.address.state,
+  };
+
+  res.render('editDoctor', { doctor: formattedDoctor });
+}
+
 async function getAllDoctorsPage(req, res) {
   const doctors = await Doctor.find().exec();
 
@@ -62,8 +83,7 @@ async function createDoctor(req, res) {
 
 async function updateDoctorById(req, res) {
   const { id } = req.params;
-  const { firstName, lastName, dob, state, suburb, street, unit, numPatients } =
-    req.body;
+  const { firstName, lastName, dob, state, suburb, street, unit } = req.body;
 
   try {
     const doctor = await Doctor.findByIdAndUpdate(id, {
@@ -78,9 +98,8 @@ async function updateDoctorById(req, res) {
         street,
         unit,
       },
-      numPatients: numPatients,
     }).exec();
-    return doctor;
+    res.redirect('/doctors');
   } catch (error) {
     console.log(error);
     return res.sendStatus(404);
@@ -99,8 +118,9 @@ async function deleteDoctorById(req, res) {
 }
 
 module.exports = {
-  getAddDoctorPage,
   getAllDoctorsPage,
+  getAddDoctorPage,
+  getEditDoctorPage,
   getDoctorById,
   createDoctor,
   updateDoctorById,
