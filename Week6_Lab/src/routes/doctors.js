@@ -1,8 +1,8 @@
 const express = require('express');
 
 const {
+  getAllDoctorsPage,
   getAddDoctorPage,
-  getAllDoctors,
   getDoctorById,
   createDoctor,
   updateDoctorById,
@@ -12,7 +12,7 @@ const {
 const router = express.Router();
 
 router.get('/addDoctor', getAddDoctorPage);
-router.get('/', getAllDoctors);
+router.get('/', getAllDoctorsPage);
 router.get('/:id', getDoctorById);
 router.post('/', createDoctor);
 router.post('/:id', updateDoctorById);

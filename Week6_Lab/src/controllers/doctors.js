@@ -1,3 +1,4 @@
+const dayjs = require('dayjs');
 const Doctor = require('../models/doctors');
 const Patient = require('../models/patients');
 
@@ -5,12 +6,25 @@ function getAddDoctorPage(req, res) {
   res.render('addDoctor');
 }
 
-async function getAllDoctors(req, res) {
+async function getAllDoctorsPage(req, res) {
   const doctors = await Doctor.find().exec();
+
   if (!doctors) {
     return res.sendStatus(404);
   }
-  return doctors;
+
+  const doctorsForDisplay = doctors.map((doctor) => ({
+    ...doctor,
+    _id: doctor._id,
+    fullName: `${doctor.fullName.firstName} ${doctor.fullName.firstName}`,
+    dateOfBirth: dayjs(doctor.dateOfBirth).format('DD/MM/YYYY'),
+    address: `${
+      doctor.address.unit
+    }, ${doctor.address.street.toUpperCase()}, ${doctor.address.suburb.toUpperCase()}, ${doctor.address.state.toUpperCase()}`,
+    numPatients: doctor.numPatients,
+  }));
+
+  res.render('allDoctors', { allDoctors: doctorsForDisplay });
 }
 
 async function getDoctorById(req, res) {
@@ -87,7 +101,7 @@ async function deleteDoctorById(req, res) {
 
 module.exports = {
   getAddDoctorPage,
-  getAllDoctors,
+  getAllDoctorsPage,
   getDoctorById,
   createDoctor,
   updateDoctorById,

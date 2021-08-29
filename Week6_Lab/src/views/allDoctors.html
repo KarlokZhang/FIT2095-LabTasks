@@ -1,6 +1,6 @@
 <%- include('header.html') -%>
-<!-- When Books db is Empty -->
-<% if(books.length === 0) { %>
+<!-- When Doctors db is Empty -->
+<% if(allDoctors.length === 0) { %>
 <div class="row pt-5">
   <div class="col-4">
     <img class="error--img" src="/images/emptyError.jpg" alt="error-img" />
@@ -27,34 +27,34 @@
 </div>
 <% } %>
 <!-- When Books db have books -->
-<% if(books.length > 0) { %>
-<h2 class="py-4">All Books:</h2>
+<% if(allDoctors.length > 0) { %>
+<h2 class="py-4">All Doctors:</h2>
 <table class="table table-bordered">
   <tr class="table-primary">
-    <th>Title</th>
-    <th>Author</th>
-    <th>Topic</th>
-    <th>Publish Date</th>
-    <th>Summary</th>
+    <th>Id</th>
+    <th>Full Name</th>
+    <th>Date Of Birth</th>
+    <th>Address</th>
+    <th>Patients</th>
     <th>Action</th>
   </tr>
-  <% for (let i = 0; i < books.length; i++){ %>
+  <% for (let i = 0; i < allDoctors.length; i++){ %>
   <tr>
-    <td><%= books[i].title %></td>
-    <td><%= books[i].author %></td>
-    <td><%= books[i].topic %></td>
-    <td><%= books[i].dop %></td>
-    <td><%= books[i].summary.substring(0, 100) + ' ...' %></td>
+    <td><%= allDoctors[i]._id %></td>
+    <td><%= allDoctors[i].fullName %></td>
+    <td><%= allDoctors[i].dateOfBirth %></td>
+    <td><%= allDoctors[i].address %></td>
+    <td><%= allDoctors[i].numPatients %></td>
     <td class="d-flex justify-content-between align-items-center">
       <a
         class="btn btn-sm btn-outline-primary"
-        href="<%= `/editBook/${books[i]._id}` %>"
+        href="<%= `/editBook/${allDoctors[i]._id}` %>"
         role="button"
         >edit</a
       >
       <a
         class="btn btn-sm btn-outline-danger"
-        href="<%= `/deleteId/${books[i]._id}` %>"
+        href="<%= `/deleteId/${allDoctors[i]._id}` %>"
         role="button"
         >del</a
       >
