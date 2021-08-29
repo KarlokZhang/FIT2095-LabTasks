@@ -14,9 +14,8 @@ async function getAllDoctorsPage(req, res) {
   }
 
   const doctorsForDisplay = doctors.map((doctor) => ({
-    ...doctor,
     _id: doctor._id,
-    fullName: `${doctor.fullName.firstName} ${doctor.fullName.firstName}`,
+    fullName: `${doctor.fullName.firstName} ${doctor.fullName.lastName}`,
     dateOfBirth: dayjs(doctor.dateOfBirth).format('DD/MM/YYYY'),
     address: `${doctor.address.unit}, ${doctor.address.street}, ${
       doctor.address.suburb

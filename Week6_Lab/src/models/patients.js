@@ -31,7 +31,7 @@ const schema = new Schema({
     type: String,
     minlength: 10,
   },
-  doctorId: {
+  doctor: {
     type: Schema.Types.ObjectId,
     ref: 'Doctor',
   },

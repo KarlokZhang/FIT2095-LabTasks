@@ -1,0 +1,67 @@
+<%- include('header.html') -%>
+<!-- When Doctors db is Empty -->
+<% if(allPatients.length === 0) { %>
+<div class="row pt-5">
+  <div class="col-4">
+    <img class="error--img" src="/images/emptyError.jpg" alt="error-img" />
+  </div>
+  <div
+    class="
+      col-8
+      error-msg
+      text-center
+      d-flex
+      flex-column
+      justify-content-center
+    "
+  >
+    <h2 class="display-3 fw-bold py-5">OOPS!</h2>
+    <p class="fs-4 fw-light text-secondary">Your patient list is Empty!</p>
+    <p class="fs-4 fw-light text-secondary">Please go to add patient first.</p>
+    <div class="pt-5">
+      <a class="btn btn-secondary" href="/addbook" role="button"
+        >Add Patients</a
+      >
+    </div>
+  </div>
+</div>
+<% } %>
+<!-- When Books db have books -->
+<% if(allPatients.length > 0) { %>
+<h2 class="py-4">All Patients:</h2>
+<table class="table table-bordered">
+  <tr class="table-primary">
+    <th>Id</th>
+    <th>Full Name</th>
+    <th>Age</th>
+    <th>Date Of Visit</th>
+    <th>Doctor</th>
+    <th>Case Description</th>
+    <th>Action</th>
+  </tr>
+  <% for (let i = 0; i < allPatients.length; i++){ %>
+  <tr>
+    <td><%= allPatients[i]._id %></td>
+    <td class="capitalize"><%= allPatients[i].fullName %></td>
+    <td><%= allPatients[i].age %></td>
+    <td><%= allPatients[i].dateOfVisit %></td>
+    <td class="capitalize"><%= allPatients[i].doctor %></td>
+    <td><%= allPatients[i].description %></td>
+    <td class="d-flex justify-content-between align-items-center">
+      <a
+        class="btn btn-sm btn-outline-primary"
+        href="<%= `/editBook/${allPatients[i]._id}` %>"
+        role="button"
+        >edit</a
+      >
+      <a
+        class="btn btn-sm btn-outline-danger"
+        href="<%= `/deleteId/${allPatients[i]._id}` %>"
+        role="button"
+        >del</a
+      >
+    </td>
+  </tr>
+  <% }%>
+</table>
+<% } %> <%- include('footer.html') -%>

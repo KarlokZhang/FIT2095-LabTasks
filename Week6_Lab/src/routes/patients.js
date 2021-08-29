@@ -2,7 +2,7 @@ const express = require('express');
 
 const {
   getAddPatientPage,
-  getAllPatients,
+  getAllPatientsPage,
   getPatientById,
   createPatient,
   updatePatientById,
@@ -12,7 +12,7 @@ const {
 const router = express.Router();
 
 router.get('/addPatient', getAddPatientPage);
-router.get('/', getAllPatients);
+router.get('/', getAllPatientsPage);
 router.get('/:id', getPatientById);
 router.post('/', createPatient);
 router.post('/:id', updatePatientById);
