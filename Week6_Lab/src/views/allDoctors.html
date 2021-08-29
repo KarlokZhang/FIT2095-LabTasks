@@ -41,9 +41,9 @@
   <% for (let i = 0; i < allDoctors.length; i++){ %>
   <tr>
     <td><%= allDoctors[i]._id %></td>
-    <td><%= allDoctors[i].fullName %></td>
+    <td class="capitalize"><%= allDoctors[i].fullName %></td>
     <td><%= allDoctors[i].dateOfBirth %></td>
-    <td><%= allDoctors[i].address %></td>
+    <td class="capitalize"><%= allDoctors[i].address %></td>
     <td><%= allDoctors[i].numPatients %></td>
     <td class="d-flex justify-content-between align-items-center">
       <a

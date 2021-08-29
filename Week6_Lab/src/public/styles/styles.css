@@ -1,11 +1,11 @@
-body{
+body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
 
-.header{
+.header {
   padding: 0 80px;
   display: flex;
   flex-direction: row;
@@ -14,16 +14,20 @@ body{
   border-bottom: 1px solid lightgrey;
 }
 
-.logo--img{
+.logo--img {
   width: 48px;
   height: auto;
 }
 
-.nav--btn{
+.nav--btn {
   display: block;
 }
 
-.error--img{
+.error--img {
   width: 100%;
   height: auto;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }

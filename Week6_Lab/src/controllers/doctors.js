@@ -18,9 +18,9 @@ async function getAllDoctorsPage(req, res) {
     _id: doctor._id,
     fullName: `${doctor.fullName.firstName} ${doctor.fullName.firstName}`,
     dateOfBirth: dayjs(doctor.dateOfBirth).format('DD/MM/YYYY'),
-    address: `${
-      doctor.address.unit
-    }, ${doctor.address.street.toUpperCase()}, ${doctor.address.suburb.toUpperCase()}, ${doctor.address.state.toUpperCase()}`,
+    address: `${doctor.address.unit}, ${doctor.address.street}, ${
+      doctor.address.suburb
+    }, ${doctor.address.state.toUpperCase()}`,
     numPatients: doctor.numPatients,
   }));
 
