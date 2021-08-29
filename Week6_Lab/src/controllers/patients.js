@@ -48,10 +48,6 @@ async function createPatient(req, res) {
     return res.sendStatus(404);
   }
 
-  if (dateOfVisit === '') {
-    dateOfVisit = undefined;
-  }
-
   try {
     const patient = new Patient({
       fullName: {
