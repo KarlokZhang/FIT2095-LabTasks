@@ -24,4 +24,24 @@ function checkInvalidPatient(req, res, next) {
   next();
 }
 
-module.exports = { checkInvalidPatient };
+function checkInvalidDoctor(req, res, next) {
+  const { firstName, lastName, dob, unit, street, suburb, state } = req.body;
+  if (
+    !firstName ||
+    !lastName ||
+    !dob ||
+    !unit ||
+    !street ||
+    !suburb ||
+    !state
+  ) {
+    const errorMessage = {
+      message: "Doctor's name, date of birth and address can not be empty.",
+      link: '/doctors/addDoctor',
+    };
+    return res.render('invalid', { errorMessage });
+  }
+  next();
+}
+
+module.exports = { checkInvalidPatient, checkInvalidDoctor };
