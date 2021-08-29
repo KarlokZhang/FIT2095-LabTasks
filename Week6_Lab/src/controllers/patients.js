@@ -28,6 +28,15 @@ async function createPatient(req, res) {
   const { firstName, lastName, age, dateOfVisit, description, doctorId } =
     req.body;
 
+  // 1. find if have doctor by doctorId
+  //    - yes: update doctor num of patient (+ 1)
+  //    - no: return error
+  const doctor = await Doctor.findById(doctorId);
+
+  if (!doctor) {
+    return res.sendStatus(404);
+  }
+
   try {
     const patient = new Patient({
       fullName: {
@@ -40,8 +49,10 @@ async function createPatient(req, res) {
       doctorId: doctorId,
     });
 
-    const result = await patient.save();
-    return result;
+    doctor.numPatients += 1;
+    await patient.save();
+    await doctor.save();
+    return patient;
   } catch (error) {
     console.log(error);
   }
@@ -86,7 +97,7 @@ async function updatePatientById(req, res) {
       await currentDoctor.save();
       await doctor.save();
     }
-    return patient;
+    res.redirect('/allPatients');
   } catch (error) {
     console.log(error);
     return res.sendStatus(404);
