@@ -17,7 +17,7 @@ async function getAllPatientsPage(req, res) {
     fullName: `${patient.fullName.firstName} ${patient.fullName.lastName}`,
     age: patient.age,
     dateOfVisit: dayjs(patient.dateOfVisit).format('DD/MM/YYYY'),
-    doctor: `${patient.doctor.fullName.firstName} ${patient.doctor.fullName.lastName}`,
+    doctor: `${patient.doctor?.fullName.firstName} ${patient.doctor?.fullName.lastName}`,
     description: patient.caseDescription,
   }));
 

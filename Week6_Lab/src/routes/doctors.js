@@ -18,6 +18,6 @@ router.get('/edit/:id', getEditDoctorPage);
 router.get('/:id', getDoctorById);
 router.post('/', createDoctor);
 router.post('/edit/:id', updateDoctorById);
-router.post('/delete/:id', deleteDoctorById);
+router.get('/delete/:id', deleteDoctorById);
 
 module.exports = router;

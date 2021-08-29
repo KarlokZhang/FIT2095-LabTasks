@@ -9,8 +9,6 @@ function getAddDoctorPage(req, res) {
 async function getEditDoctorPage(req, res) {
   const { id } = req.params;
   const doctor = await Doctor.findById(id);
-  console.log(doctor.dateOfBirth);
-  console.log(dayjs(doctor.dateOfBirth).format('YYYY-MM-DD'));
   doctor.dateOfBirth = dayjs(doctor.dateOfBirth).format('YYYY-MM-DD');
 
   const formattedDoctor = {
@@ -109,8 +107,9 @@ async function updateDoctorById(req, res) {
 async function deleteDoctorById(req, res) {
   const { id } = req.params;
   try {
-    const doctor = await Doctor.findByIdAndDelete(id).exec();
-    return res.sendStatus(204);
+    const result = await Doctor.findByIdAndDelete(id).exec();
+    console.log(result);
+    res.redirect('/doctors');
   } catch (error) {
     console.log(error);
     return res.sendStatus(404);
