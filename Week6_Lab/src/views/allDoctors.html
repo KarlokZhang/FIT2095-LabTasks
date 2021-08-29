@@ -16,17 +16,17 @@
     "
   >
     <h2 class="display-3 fw-bold py-5">OOPS!</h2>
-    <p class="fs-4 fw-light text-secondary">Your book store is Empty!</p>
-    <p class="fs-4 fw-light text-secondary">
-      Please go to add some book first.
-    </p>
+    <p class="fs-4 fw-light text-secondary">Your Doctor List is Empty!</p>
+    <p class="fs-4 fw-light text-secondary">Please go to add doctor first.</p>
     <div class="pt-5">
-      <a class="btn btn-secondary" href="/addbook" role="button">Add Book</a>
+      <a class="btn btn-secondary" href="/doctors/addDoctor" role="button"
+        >Add Doctor</a
+      >
     </div>
   </div>
 </div>
 <% } %>
-<!-- When Books db have books -->
+<!-- When Doctor db have doctors -->
 <% if(allDoctors.length > 0) { %>
 <h2 class="py-4">All Doctors:</h2>
 <table class="table table-bordered">

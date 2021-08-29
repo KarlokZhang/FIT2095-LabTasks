@@ -1,5 +1,5 @@
 <%- include('header.html') -%>
-<!-- When Doctors db is Empty -->
+<!-- When Patients db is Empty -->
 <% if(allPatients.length === 0) { %>
 <div class="row pt-5">
   <div class="col-4">
@@ -19,14 +19,14 @@
     <p class="fs-4 fw-light text-secondary">Your patient list is Empty!</p>
     <p class="fs-4 fw-light text-secondary">Please go to add patient first.</p>
     <div class="pt-5">
-      <a class="btn btn-secondary" href="/addbook" role="button"
+      <a class="btn btn-secondary" href="/patients/addPatient" role="button"
         >Add Patients</a
       >
     </div>
   </div>
 </div>
 <% } %>
-<!-- When Books db have books -->
+<!-- When Patients db have patients -->
 <% if(allPatients.length > 0) { %>
 <h2 class="py-4">All Patients:</h2>
 <table class="table table-bordered">
@@ -49,14 +49,8 @@
     <td><%= allPatients[i].description %></td>
     <td class="d-flex justify-content-between align-items-center">
       <a
-        class="btn btn-sm btn-outline-primary"
-        href="<%= `/editBook/${allPatients[i]._id}` %>"
-        role="button"
-        >edit</a
-      >
-      <a
         class="btn btn-sm btn-outline-danger"
-        href="<%= `/deleteId/${allPatients[i]._id}` %>"
+        href="<%= `/patients/delete/${allPatients[i]._id}` %>"
         role="button"
         >del</a
       >

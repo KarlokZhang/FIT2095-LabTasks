@@ -73,7 +73,7 @@ async function createDoctor(req, res) {
   try {
     const result = await doctor.save();
     console.log(result);
-    res.redirect('/');
+    res.redirect('/doctors');
   } catch (error) {
     console.log(error);
   }

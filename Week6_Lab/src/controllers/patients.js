@@ -36,7 +36,7 @@ async function getPatientById(req, res) {
 }
 
 async function createPatient(req, res) {
-  const { firstName, lastName, age, dateOfVisit, description, doctorId } =
+  let { firstName, lastName, age, dateOfVisit, description, doctorId } =
     req.body;
 
   // 1. find if have doctor by doctorId
@@ -46,6 +46,10 @@ async function createPatient(req, res) {
 
   if (!doctor) {
     return res.sendStatus(404);
+  }
+
+  if (dateOfVisit === '') {
+    dateOfVisit = undefined;
   }
 
   try {
@@ -116,10 +120,20 @@ async function updatePatientById(req, res) {
 }
 
 async function deletePatientById(req, res) {
+  // 1. get doctor id
+  // 2. get doctor
+  // 3. update doctor num of patients -1
+  // 4. save doctor
   const { id } = req.params;
+
   try {
-    const patient = await Patient.findByIdAndDelete(id).exec();
-    return res.sendStatus(204);
+    const patient = await Patient.findById(id);
+    const doctor = await Doctor.findById(patient.doctor._id);
+    doctor.numPatients -= 1;
+    doctor.save();
+    const result = await Patient.findByIdAndDelete(id).exec();
+    console.log(result);
+    res.redirect('/patients');
   } catch (error) {
     console.log(error);
     return res.sendStatus(404);

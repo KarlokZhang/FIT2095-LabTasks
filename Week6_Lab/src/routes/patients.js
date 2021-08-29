@@ -16,6 +16,6 @@ router.get('/', getAllPatientsPage);
 router.get('/:id', getPatientById);
 router.post('/', createPatient);
 router.post('/:id', updatePatientById);
-router.post('/:id', deletePatientById);
+router.get('/delete/:id', deletePatientById);
 
 module.exports = router;
