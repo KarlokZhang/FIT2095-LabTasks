@@ -1,0 +1,54 @@
+<%- include('header.html') -%>
+<h2 class="py-4">Add New Patient</h2>
+
+<form action="/patients" method="POST">
+  <div class="row mb-3">
+    <div class="form-group col-4">
+      <label class="form-label" for="fName">First Name:</label>
+      <input type="text" class="form-control" id="fName" name="firstName" />
+    </div>
+    <div class="form-group col-4">
+      <label class="form-label" for="lName">Last Name:</label>
+      <input type="text" class="form-control" id="lName" name="lastName" />
+    </div>
+    <div class="form-group col-2">
+      <label for="ageInput" class="form-label">Age:</label>
+      <input type="number" class="form-control" id="ageInput" name="age" />
+    </div>
+  </div>
+  <div class="form-row mb-3">
+    <div class="row">
+      <div class="form-group col-3 mb-3">
+        <label for="dateOfBirth" class="form-label">Date Of Visit:</label>
+        <input type="date" class="form-control" id="dateOfBirth" name="dob" />
+      </div>
+
+      <div class="form-group col-5">
+        <label for="doctorInput" class="form-label">Doctor Id:</label>
+        <input
+          id="doctorInput"
+          class="form-control"
+          type="text"
+          placeholder="doctor Id"
+          name="doctorId"
+        />
+      </div>
+      <div class="form-group col-10">
+        <label for="caseInput" class="form-label">Case Description:</label>
+        <textarea
+          id="caseInput"
+          class="form-control"
+          type="text"
+          rows="10"
+          name="description"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end col-10">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+<%- include('footer.html') -%>

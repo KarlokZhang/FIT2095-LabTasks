@@ -1,6 +1,10 @@
 const Doctor = require('../models/doctors');
 const Patient = require('../models/patients');
 
+function getAddPatientPage(req, res) {
+  res.render('addPatient');
+}
+
 async function getAllPatients(req, res) {
   const patients = await Patient.find().exec();
   if (!patients) {
@@ -35,6 +39,7 @@ async function createPatient(req, res) {
       caseDescription: description,
       doctorId: doctorId,
     });
+
     const result = await patient.save();
     return result;
   } catch (error) {
@@ -100,6 +105,7 @@ async function deletePatientById(req, res) {
 }
 
 module.exports = {
+  getAddPatientPage,
   getAllPatients,
   getPatientById,
   createPatient,
