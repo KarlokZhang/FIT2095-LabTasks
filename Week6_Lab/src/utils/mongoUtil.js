@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 exports.connectToDB = () => {
-  const connectionString =
+  const host =
     process.env.NODE_ENV === 'production'
-      ? process.env.PRODUCTION_CONNECTION_URL
-      : process.env.DEV_CONNECTION_URL;
+      ? process.argv[2]
+      : process.env.DB_HOST;
+  const connectionString = `mongodb://${host}:27017/FIT2095Lab6`;
 
   const db = mongoose.connection;
   db.on('connected', () => {
@@ -18,7 +19,7 @@ exports.connectToDB = () => {
   db.on('disconnected', () => {
     console.log('disconnected');
   });
-  mongoose.connect('mongodb://localhost:27017/FIT2095Lab6', {
+  mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
