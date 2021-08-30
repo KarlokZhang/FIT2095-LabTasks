@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
 exports.connectToDB = () => {
-  const dbName = process.env.DB_NAME;
   const connectionString =
     process.env.NODE_ENV === 'production'
-      ? process.env.PRODUCTION_CONNECTION_URL + dbName
-      : process.env.DEV_CONNECTION_URL + dbName;
+      ? process.env.PRODUCTION_CONNECTION_URL
+      : process.env.DEV_CONNECTION_URL;
   const db = mongoose.connection;
   db.on('connected', () => {
     console.log(`DB connected with ${connectionString}`);
