@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: './.env' });
 const app = require('./src/app');
 const { connectToDB } = require('./src/utils/mongoUtil');
 const PORT = process.env.PORT || 8080;
