@@ -6,6 +6,7 @@ exports.connectToDB = () => {
       ? process.argv[2]
       : process.env.DB_HOST;
   const connectionString = `mongodb://${host}:27017/FIT2095Lab6`;
+  console.log(connectionString);
 
   const db = mongoose.connection;
   db.on('connected', () => {
