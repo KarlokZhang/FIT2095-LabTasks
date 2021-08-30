@@ -19,7 +19,7 @@ exports.connectToDB = () => {
   db.on('disconnected', () => {
     console.log('disconnected');
   });
-  mongoose.connect(connectionString, {
+  mongoose.connect('mongodb://localhost:27017/FIT2095Lab6', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
