@@ -1,5 +1,3 @@
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 const mongoose = require('mongoose');
 
 exports.connectToDB = () => {
@@ -8,9 +6,6 @@ exports.connectToDB = () => {
       ? process.env.PRODUCTION_CONNECTION_URL
       : process.env.DEV_CONNECTION_URL;
 
-  console.log(process.env.NODE_ENV);
-  console.log(process.env.DEV_CONNECTION_URL);
-  console.log(process.env.PRODUCTION_CONNECTION_URL);
   const db = mongoose.connection;
   db.on('connected', () => {
     console.log(`DB connected with ${connectionString}`);
