@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 exports.connectToDB = () => {
-  const host = process.argv[2];
+  const host = process.env.DB_HOST || process.argv[2];
   const connectionString = `mongodb://${host}:27017/FIT2095Lab6`;
   console.log(connectionString);
 

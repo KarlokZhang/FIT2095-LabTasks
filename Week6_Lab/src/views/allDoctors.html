@@ -53,6 +53,12 @@
         >edit</a
       >
       <a
+        class="btn btn-sm btn-outline-secondary"
+        href="<%= `/doctors/updateState/${allDoctors[i]._id}` %>"
+        role="button"
+        >update</a
+      >
+      <a
         class="btn btn-sm btn-outline-danger"
         href="<%= `/doctors/delete/${allDoctors[i]._id}` %>"
         role="button"

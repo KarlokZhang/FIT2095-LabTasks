@@ -116,6 +116,21 @@ async function deleteDoctorById(req, res) {
   }
 }
 
+async function updateDoctorStateById(req, res) {
+  const { id } = req.params;
+  try {
+    const doctor = await Doctor.findById(id);
+    const result = await Doctor.updateOne(
+      { _id: id },
+      { $set: { 'address.state': doctor.address.state.toUpperCase() } },
+    ).exec();
+    res.redirect('/doctors');
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(404);
+  }
+}
+
 module.exports = {
   getAllDoctorsPage,
   getAddDoctorPage,
@@ -124,4 +139,5 @@ module.exports = {
   createDoctor,
   updateDoctorById,
   deleteDoctorById,
+  updateDoctorStateById,
 };

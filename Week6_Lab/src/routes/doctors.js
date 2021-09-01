@@ -8,6 +8,7 @@ const {
   createDoctor,
   updateDoctorById,
   deleteDoctorById,
+  updateDoctorStateById,
 } = require('../controllers/doctors');
 
 const { checkInvalidDoctor } = require('../middlewares/inputValidation');
@@ -21,5 +22,6 @@ router.get('/:id', getDoctorById);
 router.post('/', checkInvalidDoctor, createDoctor);
 router.post('/edit/:id', updateDoctorById);
 router.get('/delete/:id', deleteDoctorById);
+router.get('/updateState/:id', updateDoctorStateById);
 
 module.exports = router;
