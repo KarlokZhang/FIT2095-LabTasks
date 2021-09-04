@@ -6,6 +6,7 @@ const {
   createActor,
   updateActorById,
   deleteActorById,
+  addActorToMovie,
 } = require('../controllers/actors');
 
 const router = express.Router();
@@ -15,5 +16,7 @@ router.get('/:id', getActorById);
 router.post('/', createActor);
 router.put('/:id', updateActorById);
 router.delete('/:id', deleteActorById);
+
+router.post('/addActorToMovie', addActorToMovie);
 
 module.exports = router;

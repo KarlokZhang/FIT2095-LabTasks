@@ -11,7 +11,6 @@ async function getAllMovies(req, res) {
 
 async function getMovieById(req, res) {
   const { id } = req.params;
-  console.log('id: ' + id);
   const movie = await Movie.findById(id).exec();
   if (!movie) {
     return res.sendStatus(404);
@@ -60,6 +59,7 @@ async function deleteMovieById(req, res) {
 
   try {
     await Movie.findByIdAndDelete(id).exec();
+    return res.status(204).json('Movie have been deleted.');
   } catch (error) {
     return res.status(404).json(error);
   }
