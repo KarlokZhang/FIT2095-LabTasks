@@ -1,4 +1,4 @@
-const { Mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 const Movie = require('../models/movies');
 
 async function getAllMovies(req, res) {
@@ -10,25 +10,28 @@ async function getAllMovies(req, res) {
 }
 
 async function getMovieById(req, res) {
-  const { id } = req.body.params;
-  const movie = await Movie.findById(id).populate('actors').exec();
+  const { id } = req.params;
+  console.log('id: ' + id);
+  const movie = await Movie.findById(id).exec();
   if (!movie) {
-    return res.sendStatus(404)
+    return res.sendStatus(404);
   }
-  return movie;
+  return res.json(movie);
 }
 
 async function createMovie(req, res) {
   const { title, year } = req.body;
-  const movie = new Movie({new Mongoose.Types.ObjectId(), title, year})
+  const movie = new Movie({
+    title: title,
+    year: year,
+  });
 
   try {
     const newMovie = await movie.save();
-    return res.json(newMovie)
+    return res.json(newMovie);
   } catch (error) {
-    return res.status(400).json(error)
+    return res.status(400).json(error);
   }
-
 }
 
 async function updateMovieById(req, res) {
@@ -38,27 +41,27 @@ async function updateMovieById(req, res) {
 
   try {
     const movie = await Movie.findByIdAndUpdate(id, {
-      title: title, 
+      title: title,
       year: year,
-    })
+    });
 
     if (!movie) {
-      return res.sendStatus(404)
+      return res.sendStatus(404);
     }
 
-    return res.json(movie)
+    return res.json(movie);
   } catch (error) {
-    return res.status(400).json(error)
+    return res.status(400).json(error);
   }
 }
 
-async function deleteMovieById(id) {
+async function deleteMovieById(req, res) {
   const { id } = req.params;
 
   try {
     await Movie.findByIdAndDelete(id).exec();
   } catch (error) {
-    return res.status(404).json(error)
+    return res.status(404).json(error);
   }
 }
 
@@ -68,4 +71,4 @@ module.exports = {
   createMovie,
   updateMovieById,
   deleteMovieById,
-}
+};
