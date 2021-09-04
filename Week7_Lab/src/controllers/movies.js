@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Movie = require('../models/movies');
+const Actor = require('../models/actors');
 
 async function getAllMovies(req, res) {
   const movies = await Movie.find().populate('actors').exec();
@@ -65,10 +66,54 @@ async function deleteMovieById(req, res) {
   }
 }
 
+async function addMovieToActor(req, res) {
+  const { movieId, actorId } = req.params;
+
+  try {
+    const movie = await Movie.findById(movieId).exec();
+    const actor = await Actor.findById(actorId).exec();
+
+    if (!actor || !movie) {
+      return res.sendStatus(404);
+    }
+
+    actor.movies.addToSet(movie._id);
+    movie.actors.addToSet(actor.id);
+    await actor.save();
+    await movie.save();
+    return res.json(movie);
+  } catch (error) {
+    return res.json(error);
+  }
+}
+
+async function removeMovieFromActor(req, res) {
+  const { movieId, actorId } = req.params;
+
+  try {
+    const movie = await Movie.findById(movieId).exec();
+    const actor = await Actor.findById(actorId).exec();
+
+    if (!actor || !movie) {
+      return res.sendStatus(404);
+    }
+
+    movie.actors.pull(actor._id);
+    actor.movies.pull(movie._id);
+    await movie.save();
+    await actor.save();
+    return res.json(movie);
+  } catch (error) {
+    return res.json(error);
+  }
+}
+
 module.exports = {
   getAllMovies,
   getMovieById,
   createMovie,
   updateMovieById,
   deleteMovieById,
+  addMovieToActor,
+  removeMovieFromActor,
 };
