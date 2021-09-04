@@ -108,12 +108,52 @@ async function removeMovieFromActor(req, res) {
   }
 }
 
+async function getMoviesBetweenYear(req, res) {
+  const { fromYear, toYear } = req.params;
+
+  if (fromYear > toYear) {
+    return res
+      .status(404)
+      .json('Invalid Year: from year can not greater then to year.');
+  }
+
+  const movies = await Movie.find({
+    $and: [{ year: { $gte: fromYear } }, { year: { $lte: toYear } }],
+  }).exec();
+  if (!movies) {
+    return res.sendStatus(404);
+  }
+
+  return res.json(movies);
+}
+
+async function deleteMoviesBetweenYear(req, res) {
+  const { fromYear, toYear } = req.body;
+
+  if (fromYear > toYear) {
+    return res
+      .status(404)
+      .json('Invalid Year: from year can not greater then to year.');
+  }
+
+  try {
+    const result = await Movie.deleteMany({
+      $and: [{ year: { $gte: fromYear } }, { year: { $lte: toYear } }],
+    }).exec();
+    return res.json(result);
+  } catch (error) {
+    return res.json(error);
+  }
+}
+
 module.exports = {
   getAllMovies,
+  getMoviesBetweenYear,
   getMovieById,
   createMovie,
   updateMovieById,
   deleteMovieById,
   addMovieToActor,
   removeMovieFromActor,
+  deleteMoviesBetweenYear,
 };
