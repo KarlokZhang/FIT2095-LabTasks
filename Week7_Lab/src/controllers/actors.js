@@ -67,7 +67,7 @@ async function deleteActorById(req, res) {
 }
 
 async function addActorToMovie(req, res) {
-  const { actorId, movieId } = req.body;
+  const { actorId, movieId } = req.params;
 
   // 1. find actor
   // 2. find movie
@@ -90,6 +90,27 @@ async function addActorToMovie(req, res) {
   }
 }
 
+async function removeActorFromMovie(req, res) {
+  const { actorId, movieId } = req.params;
+
+  try {
+    const actor = await Actor.findById(actorId).exec();
+    const movie = await Movie.findById(movieId).exec();
+
+    if (!actor || !movie) {
+      return res.sendStatus(404);
+    }
+
+    actor.movies.pull(movie._id);
+    movie.actors.pull(actor._id);
+    await actor.save();
+    await movie.save();
+    return res.json(actor);
+  } catch (error) {
+    return res.json(error);
+  }
+}
+
 module.exports = {
   getAllActors,
   getActorById,
@@ -97,4 +118,5 @@ module.exports = {
   updateActorById,
   deleteActorById,
   addActorToMovie,
+  removeActorFromMovie,
 };

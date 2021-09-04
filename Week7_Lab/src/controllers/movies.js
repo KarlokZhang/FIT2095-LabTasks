@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Movie = require('../models/movies');
 
 async function getAllMovies(req, res) {
-  const movies = await Movie.find().exec();
+  const movies = await Movie.find().populate('actors').exec();
   if (!movies) {
     rex.sendStatus(404);
   }
