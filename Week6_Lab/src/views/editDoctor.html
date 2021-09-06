@@ -1,7 +1,7 @@
 <%- include('header.html') -%>
 <h2 class="py-4">Edit Doctor</h2>
 
-<form action="<%= `/doctors/edit/${doctor._id}` %>" method="POST">
+<div action="<%= `/doctors/edit/${doctor._id}` %>" method="POST">
   <div class="row mb-3">
     <div class="form-group col-6">
       <label class="form-label" for="fName">First Name:</label>
@@ -83,5 +83,6 @@
   <div class="d-flex justify-content-end">
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
+  </form>
 </form>
 <%- include('footer.html') -%>

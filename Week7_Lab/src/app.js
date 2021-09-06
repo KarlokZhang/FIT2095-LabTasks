@@ -5,21 +5,24 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { ApolloServer, gql } = require('apollo-server-express');
 
+const resolvers = require('./graphql/resolvers');
+const typeDefs = require('./graphql/typeDefs');
+
 const router = require('./routes');
 
 // Construct a schema, using GraphQL schema language
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
+// const typeDefs = gql`
+//   type Query {
+//     hello: String
+//   }
+// `;
 
 // Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world333333!',
-  },
-};
+// const resolvers = {
+//   Query: {
+//     hello: () => 'Hello world333333!',
+//   },
+// };
 
 const server = new ApolloServer({
   typeDefs,
