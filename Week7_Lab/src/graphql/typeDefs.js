@@ -17,8 +17,10 @@ const typeDefs = gql`
 
   type Query {
     getAllMovies: [Movie]
-    getMovie(id: String): Movie
-    actors: [Actor]
+    getMovieById(id: String): Movie
+    getMoviesBetweenYear(fromYear: Int, toYear: Int): [Movie]
+    getAllActors: [Actor]
+    getActorById(id: String): Actor
   }
 `;
 
