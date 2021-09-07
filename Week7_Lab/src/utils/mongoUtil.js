@@ -1,8 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 exports.connectToDB = () => {
-  const host = process.env.DB_HOST || 'mongo';
-  const connectionString = `mongodb://${host}:27017/FIT2095Lab7`;
+  // const host = process.env.DB_HOST || 'mongo';
+  const connectionString = `mongodb://mongo:27017/FIT2095Lab7`;
   console.log(connectionString);
 
   const db = mongoose.connection;
