@@ -146,6 +146,18 @@ async function deleteMoviesBetweenYear(req, res) {
   }
 }
 
+async function updateMovieYear(req, res) {
+  try {
+    const result = await Movie.updateMany(
+      { title: /^X/ },
+      { $inc: { year: 1 } },
+    );
+    return res.json(result);
+  } catch (error) {
+    return res.json(error);
+  }
+}
+
 module.exports = {
   getAllMovies,
   getMoviesBetweenYear,
@@ -156,4 +168,5 @@ module.exports = {
   addMovieToActor,
   removeMovieFromActor,
   deleteMoviesBetweenYear,
+  updateMovieYear,
 };

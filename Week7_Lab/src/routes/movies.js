@@ -10,6 +10,7 @@ const {
   addMovieToActor,
   removeMovieFromActor,
   deleteMoviesBetweenYear,
+  updateMovieYear,
 } = require('../controllers/movies');
 
 const router = express.Router();
@@ -17,6 +18,7 @@ const router = express.Router();
 router.get('/', getAllMovies);
 router.get('/between/:fromYear/:toYear', getMoviesBetweenYear);
 router.get('/:id', getMovieById);
+router.put('/incrementMovieYear', updateMovieYear);
 router.post('/', createMovie);
 router.put('/:id', updateMovieById);
 router.delete('/deleteBetweenYears', deleteMoviesBetweenYear);
