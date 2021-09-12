@@ -14,8 +14,8 @@ export class AppComponent {
   state: string = '';
   postCode: number | null = null;
   numOfPatients: number | null = null;
-  doctorsDb: any[] = [];
   numOfDoctorsWithZeroPatient: number = 0;
+  doctorsDb: any[] = [];
 
   saveDoctor(): void {
     this.doctorsDb.push({
