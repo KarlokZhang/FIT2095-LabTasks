@@ -15,6 +15,7 @@ export class AppComponent {
   postCode: number | null = null;
   numOfPatients: number | null = null;
   doctorsDb: any[] = [];
+  numOfDoctorsWithZeroPatient: number = 0;
 
   saveDoctor(): void {
     this.doctorsDb.push({
@@ -29,7 +30,9 @@ export class AppComponent {
       address: this.formattedAddress(this.suburb, this.state, this.postCode),
     });
 
-    console.log(this.doctorsDb);
+    if (this.numOfPatients === 0) {
+      this.numOfDoctorsWithZeroPatient += 1;
+    }
 
     this.firstName = '';
     this.lastName = '';
@@ -46,6 +49,17 @@ export class AppComponent {
     postCode: number | null
   ): string {
     return `${this.capitalizeString(suburb)}, ${state}, ${postCode}`;
+  }
+
+  deleteDoctorById(id: string): void {
+    this.doctorsDb = this.doctorsDb.filter((doctor) => doctor.id !== id);
+  }
+
+  deleteDoctorsWithZeroPatient(): void {
+    this.doctorsDb = this.doctorsDb.filter(
+      (doctor) => doctor.numOfPatients !== 0
+    );
+    this.numOfDoctorsWithZeroPatient = 0;
   }
 
   capitalizeString(str: string): string {

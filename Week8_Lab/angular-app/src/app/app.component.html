@@ -74,8 +74,14 @@
       <button class="btn btn-primary" type="button" (click)="saveDoctor()">
         Add Doctor <span class="badge bg-success">{{ doctorsDb.length }}</span>
       </button>
-      <button class="btn btn-warning mx-3" type="button" (click)="saveDoctor()">
-        Delete Docs with Patients <span class="badge bg-danger">0</span>
+      <button
+        class="btn btn-warning mx-3"
+        type="button"
+        [disabled]="numOfDoctorsWithZeroPatient === 0"
+        (click)="deleteDoctorsWithZeroPatient()"
+      >
+        Delete Docs with Patients
+        <span class="badge bg-danger">{{ numOfDoctorsWithZeroPatient }}</span>
       </button>
     </div>
   </div>
@@ -101,6 +107,14 @@
           <td>{{ doctor.dateOfBirth }}</td>
           <td>{{ doctor.address }}</td>
           <td>{{ doctor.numOfPatients }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="deleteDoctorById(doctor.id)"
+            >
+              &#10005;
+            </button>
+          </td>
         </tr>
       </tbody>
     </ng-container>
