@@ -13,9 +13,10 @@ export class AppComponent {
   suburb: string = '';
   state: string = '';
   postCode: number | null = null;
-  numOfPatients: number | null = null;
+  numOfPatients: number = 0;
   numOfDoctorsWithZeroPatient: number = 0;
   doctorsDb: any[] = [];
+  totalPatients: number = 0;
 
   saveDoctor(): void {
     this.doctorsDb.push({
@@ -34,13 +35,15 @@ export class AppComponent {
       this.numOfDoctorsWithZeroPatient += 1;
     }
 
+    this.totalPatients += this.numOfPatients;
+
     this.firstName = '';
     this.lastName = '';
     this.dateOfBirth = null;
     this.suburb = '';
     this.state = '';
     this.postCode = null;
-    this.numOfPatients = null;
+    this.numOfPatients = 0;
   }
 
   formattedAddress(
@@ -52,13 +55,22 @@ export class AppComponent {
   }
 
   deleteDoctorById(id: string): void {
-    this.doctorsDb = this.doctorsDb.filter((doctor) => doctor.id !== id);
+    // this.doctorsDb = this.doctorsDb.filter((doctor) => doctor.id !== id);
+
+    for (let i = 0; i < this.doctorsDb.length; i++) {
+      const doctor = this.doctorsDb[i];
+      if (doctor.id === id) {
+        this.doctorsDb.splice(i, 1);
+        this.totalPatients -= doctor.numOfPatients;
+      }
+    }
   }
 
   deleteDoctorsWithZeroPatient(): void {
     this.doctorsDb = this.doctorsDb.filter(
       (doctor) => doctor.numOfPatients !== 0
     );
+
     this.numOfDoctorsWithZeroPatient = 0;
   }
 

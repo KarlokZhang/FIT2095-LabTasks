@@ -83,6 +83,10 @@
         Delete Docs with Patients
         <span class="badge bg-danger">{{ numOfDoctorsWithZeroPatient }}</span>
       </button>
+      <h4>
+        Average Number Of Doctors:
+        {{ totalPatients / doctorsDb.length }}
+      </h4>
     </div>
   </div>
 
