@@ -5,6 +5,8 @@ const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+const { connectToDB } = require("./src/utils/mongoUtil");
+
 const router = require("./routes");
 const PORT = process.env.PORT || 8080;
 
@@ -24,8 +26,9 @@ app.use(
 );
 
 app.use("/", express.static(path.join(__dirname, "dist/movieAng")));
+app.use("/", router);
 
-// app.use("/", router);
+connectToDB();
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);

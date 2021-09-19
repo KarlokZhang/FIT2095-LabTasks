@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const Actor = require('../models/actors');
-const Movie = require('../models/movies');
+const mongoose = require("mongoose");
+const Actor = require("../models/actors");
+const Movie = require("../models/movies");
 
 async function getAllActors(req, res) {
-  const actors = await Actor.find().populate('movies').exec();
+  const actors = await Actor.find().populate("movies").exec();
   if (!actors) {
     rex.sendStatus(404);
   }
@@ -28,7 +28,7 @@ async function createActor(req, res) {
 
   try {
     const newActor = await actor.save();
-    return res.json(newActor);
+    return res.json(actor);
   } catch (error) {
     return res.status(400).json(error);
   }
@@ -60,7 +60,7 @@ async function deleteActorById(req, res) {
 
   try {
     await Actor.findByIdAndDelete(id).exec();
-    return res.status(204).json('Actor have been deleted.');
+    return res.status(204).json("Actor have been deleted.");
   } catch (error) {
     return res.status(404).json(error);
   }
