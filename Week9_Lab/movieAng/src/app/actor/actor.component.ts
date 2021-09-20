@@ -8,47 +8,13 @@ import { DatabaseService } from '../database.service';
 })
 export class ActorComponent implements OnInit {
   actorsDB: any[] = [];
-
   section = 1;
-
   fullName: string = '';
   bYear: number = 0;
   actorId: string = '';
 
   constructor(private dbService: DatabaseService) {}
 
-  //Get all Actors
-  onGetActors() {
-    this.dbService.getActors().subscribe((data: any) => {
-      this.actorsDB = data;
-    });
-  }
-  //Create a new Actor, POST request
-  onSaveActor() {
-    let obj = { name: this.fullName, bYear: this.bYear };
-    this.dbService.createActor(obj).subscribe((result) => {
-      this.onGetActors();
-    });
-  }
-  // Update an Actor
-  onSelectUpdate(item: any) {
-    this.fullName = item.name;
-    this.bYear = item.bYear;
-    this.actorId = item._id;
-  }
-  onUpdateActor() {
-    let obj = { name: this.fullName, bYear: this.bYear };
-    this.dbService.updateActor(this.actorId, obj).subscribe((result) => {
-      this.onGetActors();
-    });
-  }
-
-  //Delete Actor
-  onDeleteActor(item: any) {
-    this.dbService.deleteActor(item._id).subscribe((result) => {
-      this.onGetActors();
-    });
-  }
   // This lifecycle callback function will be invoked with the component get initialized by Angular.
   ngOnInit() {
     this.onGetActors();
@@ -63,5 +29,41 @@ export class ActorComponent implements OnInit {
     this.fullName = '';
     this.bYear = 0;
     this.actorId = '';
+  }
+
+  //Get all Actors
+  onGetActors() {
+    this.dbService.getActors().subscribe((data: any) => {
+      this.actorsDB = data;
+    });
+  }
+
+  //Create a new Actor, POST request
+  onSaveActor() {
+    let obj = { name: this.fullName, bYear: this.bYear };
+    this.dbService.createActor(obj).subscribe((result) => {
+      this.onGetActors();
+    });
+  }
+
+  // Update an Actor
+  onSelectUpdate(item: any) {
+    this.fullName = item.name;
+    this.bYear = item.bYear;
+    this.actorId = item._id;
+  }
+
+  onUpdateActor() {
+    let obj = { name: this.fullName, bYear: this.bYear };
+    this.dbService.updateActor(this.actorId, obj).subscribe((result) => {
+      this.onGetActors();
+    });
+  }
+
+  //Delete Actor
+  onDeleteActor(item: any) {
+    this.dbService.deleteActor(item._id).subscribe((result) => {
+      this.onGetActors();
+    });
   }
 }
