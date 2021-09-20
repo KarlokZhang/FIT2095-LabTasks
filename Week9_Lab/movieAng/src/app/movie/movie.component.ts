@@ -42,6 +42,7 @@ export class MovieComponent implements OnInit {
     let obj = { title: this.title, year: this.year };
     this.dbService.createMovie(obj).subscribe((result) => {
       this.onGetMovies();
+      this.resetValues();
     });
   }
 
@@ -56,13 +57,22 @@ export class MovieComponent implements OnInit {
     let obj = { title: this.title, year: this.year };
     this.dbService.updateMovie(this.movieId, obj).subscribe((result) => {
       this.onGetMovies();
+      this.resetValues();
     });
   }
 
-  //Delete Movie
+  // Delete Movie
   onDeleteMovie(item: any) {
     this.dbService.deleteMovie(item._id).subscribe((result) => {
       this.onGetMovies();
+    });
+  }
+
+  // Delete Movie By Title
+  onDeleteMovieByTitle() {
+    this.dbService.deleteMovieByTitle(this.title).subscribe((result) => {
+      this.onGetMovies();
+      this.resetValues();
     });
   }
 }

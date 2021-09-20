@@ -70,11 +70,7 @@ async function deleteMovieByTitle(req, res) {
   const { title } = req.params;
 
   try {
-    const movie = await Movie.find({ title: title }).exec();
-    if (!movie) {
-      return res.sendStatus(404);
-    }
-    await Movie.findByIdAndDelete(movie._id);
+    await Movie.deleteOne({ title: title }).exec();
     return res.status(204).json("Movie have been deleted.");
   } catch (error) {
     return res.status(400).json(error);
