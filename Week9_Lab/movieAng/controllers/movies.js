@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const Movie = require('../models/movies');
-const Actor = require('../models/actors');
+const mongoose = require("mongoose");
+const Movie = require("../models/movies");
+const Actor = require("../models/actors");
 
 async function getAllMovies(req, res) {
-  const movies = await Movie.find().populate('actors').exec();
+  const movies = await Movie.find().populate("actors").exec();
   if (!movies) {
     rex.sendStatus(404);
   }
@@ -60,9 +60,24 @@ async function deleteMovieById(req, res) {
 
   try {
     await Movie.findByIdAndDelete(id).exec();
-    return res.status(204).json('Movie have been deleted.');
+    return res.status(204).json("Movie have been deleted.");
   } catch (error) {
     return res.status(404).json(error);
+  }
+}
+
+async function deleteMovieByTitle(req, res) {
+  const { title } = req.params;
+
+  try {
+    const movie = await Movie.find({ title: title }).exec();
+    if (!movie) {
+      return res.sendStatus(404);
+    }
+    await Movie.findByIdAndDelete(movie._id);
+    return res.status(204).json("Movie have been deleted.");
+  } catch (error) {
+    return res.status(400).json(error);
   }
 }
 
@@ -114,7 +129,7 @@ async function getMoviesBetweenYear(req, res) {
   if (fromYear > toYear) {
     return res
       .status(404)
-      .json('Invalid Year: from year can not greater then to year.');
+      .json("Invalid Year: from year can not greater then to year.");
   }
 
   const movies = await Movie.find({
@@ -133,7 +148,7 @@ async function deleteMoviesBetweenYear(req, res) {
   if (fromYear > toYear) {
     return res
       .status(404)
-      .json('Invalid Year: from year can not greater then to year.');
+      .json("Invalid Year: from year can not greater then to year.");
   }
 
   try {
@@ -150,7 +165,7 @@ async function updateMovieYear(req, res) {
   try {
     const result = await Movie.updateMany(
       { title: /^X/ },
-      { $inc: { year: 1 } },
+      { $inc: { year: 1 } }
     );
     return res.json(result);
   } catch (error) {
@@ -165,6 +180,7 @@ module.exports = {
   createMovie,
   updateMovieById,
   deleteMovieById,
+  deleteMovieByTitle,
   addMovieToActor,
   removeMovieFromActor,
   deleteMoviesBetweenYear,

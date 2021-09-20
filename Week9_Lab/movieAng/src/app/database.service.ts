@@ -58,4 +58,9 @@ export class DatabaseService {
     let url = '/movies/' + id;
     return this.http.delete(url, httpOptions);
   }
+
+  deleteMovieByTitle(title: string) {
+    let url = '/movies/deleteByTitle/' + title;
+    return this.http.delete(url, httpOptions);
+  }
 }
