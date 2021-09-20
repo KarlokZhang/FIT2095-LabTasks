@@ -63,4 +63,9 @@ export class DatabaseService {
     let url = '/movies/deleteByTitle/' + title;
     return this.http.delete(url, httpOptions);
   }
+
+  deleteMoviesBetweenYears(fromYear: number, toYear: number) {
+    let url = `/movies/deleteBetweenYears/${fromYear}/${toYear}`;
+    return this.http.delete(url, httpOptions);
+  }
 }

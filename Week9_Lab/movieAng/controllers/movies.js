@@ -139,7 +139,7 @@ async function getMoviesBetweenYear(req, res) {
 }
 
 async function deleteMoviesBetweenYear(req, res) {
-  const { fromYear, toYear } = req.body;
+  const { fromYear, toYear } = req.params;
 
   if (fromYear > toYear) {
     return res

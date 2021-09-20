@@ -12,6 +12,8 @@ export class MovieComponent implements OnInit {
   title: string = '';
   year: number = 0;
   movieId: string = '';
+  fromYear: number = 0;
+  toYear: number = 0;
 
   constructor(private dbService: DatabaseService) {}
 
@@ -74,5 +76,14 @@ export class MovieComponent implements OnInit {
       this.onGetMovies();
       this.resetValues();
     });
+  }
+
+  // Delete Movie Between Years
+  onDeleteMovieBetweenYears() {
+    this.dbService
+      .deleteMoviesBetweenYears(this.fromYear, this.toYear)
+      .subscribe((result) => {
+        this.onGetMovies();
+      });
   }
 }

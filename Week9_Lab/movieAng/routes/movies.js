@@ -22,7 +22,7 @@ router.get("/:id", getMovieById);
 router.put("/incrementMovieYear", updateMovieYear);
 router.post("/", createMovie);
 router.put("/:id", updateMovieById);
-router.delete("/deleteBetweenYears", deleteMoviesBetweenYear);
+router.delete("/deleteBetweenYears/:fromYear/:toYear", deleteMoviesBetweenYear);
 router.delete("/deleteByTitle/:title", deleteMovieByTitle);
 router.delete("/:id", deleteMovieById);
 

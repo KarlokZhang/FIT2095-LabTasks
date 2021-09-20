@@ -23,6 +23,11 @@
           >Delete Movie By Title</a
         >
       </li>
+      <li class="nav-item mx-2">
+        <a class="btn btn-danger" (click)="changeSection(6)"
+          >Delete Movie Between Years</a
+        >
+      </li>
     </ul>
   </nav>
 
@@ -170,6 +175,35 @@
       (click)="onDeleteMovieByTitle()"
     >
       Delete Movie
+    </button>
+  </div>
+
+  <!-- Section 6: Delete movies between years -->
+  <div class="section" *ngIf="section == 6">
+    <div class="form-group py-2">
+      <label for="formYear">From Year</label>
+      <input
+        type="number"
+        class="form-control"
+        id="formYear"
+        [(ngModel)]="fromYear"
+      />
+    </div>
+    <div class="form-group py-2">
+      <label for="toYear">To Year</label>
+      <input
+        type="text"
+        class="form-control"
+        id="toYear"
+        [(ngModel)]="toYear"
+      />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-danger mt-4"
+      (click)="onDeleteMovieBetweenYears()"
+    >
+      Delete Movies
     </button>
   </div>
 </div>
