@@ -28,6 +28,11 @@
           >Delete Movie Between Years</a
         >
       </li>
+      <li class="nav-item mx-2">
+        <a class="btn btn-success" (click)="changeSection(7)"
+          >Add Actor to Movie</a
+        >
+      </li>
     </ul>
   </nav>
 
@@ -38,12 +43,18 @@
         <tr>
           <th>Title</th>
           <th>Produced Year</th>
+          <th>Actors</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of moviesDB">
           <td>{{ item.title }}</td>
           <td>{{ item.year }}</td>
+          <td>
+            <span *ngFor="let actor of item.actors" class="px-2">
+              {{ actor.name }}
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -92,7 +103,7 @@
             <button
               type="submit"
               class="btn btn-sm btn-success"
-              (click)="onSelectUpdate(item)"
+              (click)="onSelectMovie(item)"
             >
               Update
             </button>
@@ -204,6 +215,91 @@
       (click)="onDeleteMovieBetweenYears()"
     >
       Delete Movies
+    </button>
+  </div>
+
+  <!-- Section 7: Add Actor to A Movie -->
+  <div class="section" *ngIf="section == 7">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Movie Title</th>
+              <th>Year</th>
+              <th>Select!</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of moviesDB">
+              <td>{{ item.title }}</td>
+              <td>{{ item.year }}</td>
+              <td>
+                <button
+                  type="submit"
+                  class="btn btn-sm btn-success"
+                  (click)="onSelectMovie(item)"
+                >
+                  Select
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-6">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Actor Name</th>
+              <th>BYear</th>
+              <th>Select!</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of actorsDB">
+              <td>{{ item.name }}</td>
+              <td>{{ item.bYear }}</td>
+              <td>
+                <button
+                  type="submit"
+                  class="btn btn-sm btn-success"
+                  (click)="onSelectActor(item)"
+                >
+                  Select
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="form-group py-2">
+      <label for="movieTitle">Movie Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="movieTitle"
+        [(ngModel)]="title"
+      />
+    </div>
+    <div class="form-group py-2">
+      <label for="fullName">Actor Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="fullName"
+        [(ngModel)]="fullName"
+      />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-danger mt-4"
+      (click)="onAddActorToMovie()"
+    >
+      Add
     </button>
   </div>
 </div>
