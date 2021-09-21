@@ -139,4 +139,28 @@ export class MovieComponent implements OnInit {
         this.onGetMovies();
       });
   }
+  onClearSelection() {
+    this.actors = [];
+    this.movies = [];
+    this.title = '';
+    this.fullName = '';
+    this.year = 0;
+    this.movieId = '';
+    this.bYear = 0;
+    this.actorId = '';
+    this.actorsDB = [];
+
+    this.onGetMovies();
+  }
+
+  onGetActorsToDisplay(actorList: any[]) {
+    let message = '';
+    if (actorList.length > 1) {
+      for (let i = 0; i < actorList.length - 1; i++) {
+        message = message + actorList[i].name + ', ';
+      }
+      message = message + actorList[actorList.length - 1].name;
+    }
+    return message;
+  }
 }
