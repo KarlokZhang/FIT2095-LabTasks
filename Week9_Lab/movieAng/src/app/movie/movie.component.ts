@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service';
-
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
@@ -18,6 +17,8 @@ export class MovieComponent implements OnInit {
   fullName: string = '';
   bYear: number = 0;
   actorId: string = '';
+  actors: any[] = [];
+  movies: any[] = [];
 
   constructor(private dbService: DatabaseService) {}
 
@@ -57,10 +58,22 @@ export class MovieComponent implements OnInit {
     this.title = item.title;
     this.year = item.year;
     this.movieId = item._id;
+    this.actors = item.actors;
 
-    this.dbService.getActors().subscribe((data: any) => {
-      this.actorsDB = data;
-    });
+    if (this.section === 7) {
+      this.dbService.getActors().subscribe((data: any) => {
+        this.actorsDB = data;
+        // Filter actors already in this Movie
+        this.actorsDB = this.actorsDB.filter((actor) => {
+          for (let idx in this.actors) {
+            if (actor._id === this.actors[idx]._id) {
+              return false;
+            }
+          }
+          return true;
+        });
+      });
+    }
   }
 
   onUpdateMovie() {
@@ -100,6 +113,22 @@ export class MovieComponent implements OnInit {
     this.fullName = item.name;
     this.bYear = item.bYear;
     this.actorId = item._id;
+    this.movies = item.movies;
+
+    if (this.section === 7) {
+      this.dbService.getMovies().subscribe((data: any) => {
+        this.moviesDB = data;
+        // Filter movies already in this Actor
+        this.moviesDB = this.moviesDB.filter((movie) => {
+          for (let idx in this.movies) {
+            if (movie._id === this.movies[idx]._id) {
+              return false;
+            }
+          }
+          return true;
+        });
+      });
+    }
   }
 
   // Add Actor To Movie
