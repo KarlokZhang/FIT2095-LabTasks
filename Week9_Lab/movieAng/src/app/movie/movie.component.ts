@@ -161,6 +161,10 @@ export class MovieComponent implements OnInit {
       }
       message = message + actorList[actorList.length - 1].name;
     }
+
+    if (actorList.length == 1) {
+      message = actorList[0].name;
+    }
     return message;
   }
 }
