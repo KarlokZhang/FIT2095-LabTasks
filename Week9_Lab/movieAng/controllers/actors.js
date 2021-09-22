@@ -111,12 +111,23 @@ async function removeActorFromMovie(req, res) {
   }
 }
 
+async function deleteActorsByBirthYear(req, res) {
+  const { birthYear } = req.params;
+  try {
+    const result = await Actor.deleteMany({ bYear: birthYear }).exec();
+    return res.json(result);
+  } catch (error) {
+    return res.json(error);
+  }
+}
+
 module.exports = {
   getAllActors,
   getActorById,
   createActor,
   updateActorById,
   deleteActorById,
+  deleteActorsByBirthYear,
   addActorToMovie,
   removeActorFromMovie,
 };

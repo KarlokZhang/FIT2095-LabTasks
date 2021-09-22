@@ -66,4 +66,11 @@ export class ActorComponent implements OnInit {
       this.onGetActors();
     });
   }
+
+  // Delete Actors by birth year
+  onDeleteActorsByBirthYear() {
+    this.dbService.deleteActorsByBirthYear(this.bYear).subscribe((result) => {
+      this.onGetActors();
+    });
+  }
 }

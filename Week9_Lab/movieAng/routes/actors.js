@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 
 const {
   getAllActors,
@@ -6,19 +6,21 @@ const {
   createActor,
   updateActorById,
   deleteActorById,
+  deleteActorsByBirthYear,
   addActorToMovie,
   removeActorFromMovie,
-} = require('../controllers/actors');
+} = require("../controllers/actors");
 
 const router = express.Router();
 
-router.get('/', getAllActors);
-router.get('/:id', getActorById);
-router.post('/', createActor);
-router.put('/:id', updateActorById);
-router.delete('/:id', deleteActorById);
+router.get("/", getAllActors);
+router.get("/:id", getActorById);
+router.post("/", createActor);
+router.put("/:id", updateActorById);
+router.delete("/:id", deleteActorById);
+router.delete("/deleteActorsByBirthYear/:birthYear", deleteActorsByBirthYear);
 
-router.post('/:actorId/:movieId', addActorToMovie);
-router.delete('/:actorId/:movieId', removeActorFromMovie);
+router.post("/:actorId/:movieId", addActorToMovie);
+router.delete("/:actorId/:movieId", removeActorFromMovie);
 
 module.exports = router;

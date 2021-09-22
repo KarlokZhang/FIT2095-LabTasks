@@ -36,6 +36,11 @@ export class DatabaseService {
     return this.http.delete(url, httpOptions);
   }
 
+  deleteActorsByBirthYear(bYear: number) {
+    let url = `/actors/deleteActorsByBirthYear/${bYear}`;
+    return this.http.delete(url, httpOptions);
+  }
+
   getMovies() {
     return this.http.get('/movies');
   }

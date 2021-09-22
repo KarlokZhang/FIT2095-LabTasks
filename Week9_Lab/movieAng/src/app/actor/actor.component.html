@@ -18,6 +18,11 @@
       <li class="nav-item mx-2">
         <a class="btn btn-danger" (click)="changeSection(4)">Delete Actor</a>
       </li>
+      <li class="nav-item mx-2">
+        <a class="btn btn-danger" (click)="changeSection(5)"
+          >Delete Actor By bYear</a
+        >
+      </li>
     </ul>
   </nav>
 
@@ -146,5 +151,25 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- Section 5: Delete actor By bYear -->
+  <div class="section" *ngIf="section == 5">
+    <div class="form-group py-2">
+      <label for="birthYear">birthYear</label>
+      <input
+        type="number"
+        class="form-control"
+        id="birthYear"
+        [(ngModel)]="bYear"
+      />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-danger mt-4"
+      (click)="onDeleteActorsByBirthYear()"
+    >
+      Delete Actors
+    </button>
   </div>
 </div>
